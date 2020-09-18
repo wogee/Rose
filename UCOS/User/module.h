@@ -21,6 +21,7 @@ typedef struct _MessageModule
 		
 }ModuMsg;
 
+
 extern ModuMsg ModuleMsg;
 
 typedef struct _MessageMonitor

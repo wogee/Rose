@@ -28,19 +28,17 @@ Project File Date:  08/20/2020
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'D:\software\MDK\ARM\ARMCC\Bin'
 Build target 'CHARGER'
 compiling module.c...
-User\module.c(104): warning:  #187-D: use of "=" where "==" may have been intended
+User\module.c(111): warning:  #187-D: use of "=" where "==" may have been intended
   				if((BMSMessage.ChargeSuspendTime<10*60)&&(BMSMessage.BatteryChgAlow	=0x10))             //³äµçÔÝÍ£10·ÖÖÓ
-User\module.c(785): warning:  #1-D: last line of file ends without a newline
-  }
-User\module.c(390): warning:  #177-D: function "ModuleGet"  was declared but never referenced
+User\module.c(483): warning:  #177-D: function "ModuleGet"  was declared but never referenced
   void ModuleGet(uint8_t CMD,uint32_t Voltage,uint32_t Current,uint8_t err)
 User\module.c(26): warning:  #177-D: function "AnalyseMT46"  was declared but never referenced
   static void AnalyseMT46(void);
-User\module.c: 4 warnings, 0 errors
+User\module.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=18920 RO-data=632 RW-data=284 ZI-data=13188  
+Program Size: Code=19628 RO-data=632 RW-data=288 ZI-data=13192  
 FromELF: creating hex file...
-".\Flash\Charger.axf" - 0 Error(s), 4 Warning(s).
+".\Flash\Charger.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -58,7 +56,7 @@ Package Vendor: ARM
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
