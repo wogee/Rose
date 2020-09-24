@@ -35,7 +35,6 @@ uint32_t ModuleCurrent[8];                                                      
 static uint8_t  PowerDividerFlag;
 
 
-
 void ModuleMain (void)
 {   
 	ModuleMsg.Cnt = 0;
@@ -43,6 +42,8 @@ void ModuleMain (void)
 	ModuleMsg.StartFlag = 0;                                                       // 开机标识
 	ChargerMsg.PreCharge= 0;
 	ModuleMsg.NOcount = 1;
+  ModuleMsg.ModuleType=0;
+	
   while (1) 
  {	 
 	  OSTimeDlyHMSM(0,0,0,10);
@@ -53,14 +54,13 @@ void ModuleMain (void)
 /***************************************************************************************************
 	                              充电模块端的数据处理
 **************************************************************************************************/	
-#if MODTYPE	 
-	 
+
  //       国网模块三统一的程序	
-	if ((ModuleMsg.Cnt%200)==0)&&(ModuleMsg.ModuleType==0))	                         //心跳
+	if (((ModuleMsg.Cnt%200)==0)&&(ModuleMsg.ModuleType==0))	                         //心跳
 	{	 	 
 		ModuleSet(4,0,0,0);	 
 	}
-#endif		 
+	 
 	if ((ModuleMsg.Cnt%25)==0)	 
 	{
 		   if(ChargerMsg.ChargeStage==2)                                               // 绝缘检测状态
@@ -81,7 +81,7 @@ void ModuleMain (void)
 							 {
   								ModuleSet(2,ChargerMsg.InsuVoltage,ModuleMsg.NOcount*200,ModuleMsg.ModuleType);	     // 开机绝缘检测
 								 	OSTimeDlyHMSM(0,0,0,20);
-								 	ModuleMsg.StartFlag=1;                                               // 开机标识
+								 	ModuleMsg.StartFlag=1;                                                               // 开机标识
 							 } 
              else{
                   ModuleSet(1,ChargerMsg.InsuVoltage,ModuleMsg.NOcount*200,ModuleMsg.ModuleType);	
@@ -110,7 +110,7 @@ void ModuleMain (void)
 		  {
 				if((BMSMessage.ChargeSuspendTime<10*60)&&(BMSMessage.BatteryChgAlow	=0x10))             //充电暂停10分钟
 				{
-						if(ChargerMsg.PreCharge==0)             //预充流程                                        
+						if(ChargerMsg.PreCharge==0)                                                         //预充流程                                        
 						{
 								 if(BMSMessage.RequestVoltage<=BMSMessage.BatteryVoltage)                       //界定需求电压
 								 {
@@ -166,8 +166,9 @@ void ModuleMain (void)
             ModuleMsg.StartFlag=0;						
 					}					
 		  } 
-		}	
- 		
+			
+}		
+ 
 /***************************************************************************************************
 	                             监控端的数据处理
 **************************************************************************************************/
@@ -177,9 +178,7 @@ void ModuleMain (void)
 		   AnalyseMT33();
 			 ChargerMsg.StartCompleteflag=0;
 		 }
-		
- }
-
+	 }	
 } 
 
 static void	Module_RECData_Pro(void)  
@@ -209,36 +208,36 @@ static void	Module_RECData_Pro(void)
 //        国网模块三统一的驱动程序		 8个模块
 
 						 case 0x1820a080 :               
-										ModuleMsg.OutVoltage=MessageCAN1.DATAA>>16;
-										ModuleCurrent[0]=MessageCAN1.DATAB&0xffff;
+										ModuleMsg.OutVoltage=((MessageCAN1.DATAA&0xff00)>>8)+((MessageCAN1.DATAA&0xff0000)>>8);
+										ModuleCurrent[0]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
 								 break ;
 						 
 						 case 0x1820a081 :               
-										ModuleCurrent[1]=MessageCAN1.DATAB&0xffff;
+										ModuleCurrent[1]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
 								 break ;
 						 
 						 case 0x1820a082 :               
-										ModuleCurrent[2]=MessageCAN1.DATAB&0xffff;
+										ModuleCurrent[2]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
 								 break ;
 						 
 						 case 0x1820a083 :               
-										ModuleCurrent[3]=MessageCAN1.DATAB&0xffff;
+										ModuleCurrent[3]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
 								 break ;
 						 
 						 case 0x1820a084 :               
-										ModuleCurrent[4]=MessageCAN1.DATAB&0xffff;
+										ModuleCurrent[4]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
 								 break ;
 						 
 						 case 0x1820a085 :               
-										ModuleCurrent[5]=MessageCAN1.DATAB&0xffff;
+										ModuleCurrent[5]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
 								 break ;
 
 						 case 0x1820a086 :               
-										ModuleCurrent[6]=MessageCAN1.DATAB&0xffff;
+										ModuleCurrent[6]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
 								 break ;
 						 
 						 case 0x1820a087 :               
-										ModuleCurrent[7]=MessageCAN1.DATAB&0xffff;
+										ModuleCurrent[7]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
 								 break ;
 
 //        英飞源协议 

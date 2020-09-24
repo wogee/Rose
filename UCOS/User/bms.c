@@ -367,7 +367,6 @@ void BMSMain (void)
 							if((ChargerMsg.CRMcnt%250)==0)                                             //电池充电总状态，250ms发送一次  
 							{       
 								BMS_CRM(0x00);
-								ChargerMsg.ChargeStage = 9;
 							}
 						}
 					}
