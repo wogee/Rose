@@ -237,6 +237,9 @@ unsigned char BatterMessage[49];         //电池参数数据包
 unsigned char CFGMessage[13];            //配置参数数据包 
 unsigned char BCSMessage[9];             //充电测量数据包
 
+uint8_t InsulationFlag  ;
+uint8_t OutVoltageDetFlag;
+
 BMSMsg BMSMessage;
 ChargeMsg ChargerMsg;
 
@@ -266,6 +269,9 @@ void BMSDelay(uint32_t n)
 void ChargerMsgInit(void)
 {
 	 ChargerMsg.ChargeStage=0; //阶段清零
+   InsulationFlag    = 0;    //绝缘检测状态清零
+   OutVoltageDetFlag = 0;	   //外部电压检测清零
+	 ChargerMsg.PreCharge=0;   //预充标识
 	
 	 ChargerMsg.CHMcnt=0;      //计数器清零
 	 ChargerMsg.CRMcnt=0;
@@ -296,8 +302,9 @@ void ChargerMsgInit(void)
 	 BMSMessage.BROflag=0;	   //收到BRO就绪报文标志
 	 BMSMessage.BCLflag=0;     //收到BCL报文
 	 BMSMessage.BCSflag=0;	   //收到BCS报文
-	 BMSMessage.BCS1flag=0;	   //首次收到BCS报文	 
-	 BMSMessage.ChargeSuspendTime=0;
+	 BMSMessage.BCS1flag=0;	   //首次收到BCS报文	
+	 
+	 BMSMessage.ChargeSuspendTime=0;  //充电中暂停时间清零
 }
 
 void ChargeStart(void)
@@ -432,9 +439,10 @@ void BMSMain (void)
 										 case 0:	
 												if((ChargerMsg.CROcnt%250)==0)                                                //电池充电总状态，250ms发送一次  
 												 {									 
-														BMS_CRO(0x00);		
+														BMS_CRO(0x00);
+                            OutVoltageDetFlag=1;													 
 												 }											 
-												 OutVoltageDetFlag=1;
+												 
 												 break;
 										 
 											case 2:
@@ -442,7 +450,7 @@ void BMSMain (void)
 												 {     		
 													 BMS_CRO(0xaa);
 													 ChargerMsg.ChargeStage=7;	
-                           ChargerMsg.CROcnt=0;													 
+                           ChargerMsg.CROcnt=0;													
 													}							      
 												 break;
 											

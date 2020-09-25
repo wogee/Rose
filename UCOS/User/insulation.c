@@ -18,8 +18,7 @@
 #define INS_READ    0x01
 #define INS_WRITE   0x02
 
-uint8_t InsulationFlag    = 0;
-uint8_t OutVoltageDetFlag = 0;
+
 
 uint32_t  InsulationResistorOne = 0;		 //绝缘检测电阻1
 uint32_t  InsulationResistorTwo = 0;		 //绝缘检测电阻2
@@ -35,6 +34,8 @@ void InsulationMain (void)
  {	 
 	   uint8_t i=0;
 	  OSTimeDlyHMSM(0,0,0,500);	
+	 
+//绝缘检测
 	 if(InsulationFlag==1)
 	 {		 	
 		   InsulationSendFrame(INS_ADDR,INS_WRITE,0x021020);         //开启绝缘检测
@@ -59,6 +60,8 @@ void InsulationMain (void)
 				 InsulationSendFrame(INS_ADDR,INS_WRITE,0x021000);	      //关闭绝缘检测		
 				 InsulationFlag=2;	
 	 }
+	 
+//检测外部电压大于10V	 
 	 if(OutVoltageDetFlag==1)
 	   {
 	        InsulationSendFrame(INS_ADDR,INS_READ,0x02030405);     //读取绝缘检测数据
@@ -67,19 +70,23 @@ void InsulationMain (void)
 						 i++;				
 						 OSTimeDlyHMSM(0,0,1,0);
 						 GetInsulationResistor();
-						 if(((InsuVoltage-BMSMessage.BatteryVoltage)<(InsuVoltage/20))||((BMSMessage.BatteryVoltage-InsuVoltage)<(InsuVoltage/20)))
-						 {
-							OutVoltageDetFlag=2;
-							if(PRINT_STRING)
-							 {
-								Print("InsuVoltage:%s\n",InsuVoltage); 
-							 }
-							}
+//						 if(((InsuVoltage-BMSMessage.BatteryVoltage)<(InsuVoltage/20))||((BMSMessage.BatteryVoltage-InsuVoltage)<(InsuVoltage/20)))
+//						 {
+//							OutVoltageDetFlag=2;
+//							if(PRINT_STRING)
+//							 {
+//								Print("InsuVoltage:%s\n",InsuVoltage); 
+//							 }
+//							}
 //						 else
 //							OutVoltageDetFlag=3;
-						}while(i<3);	
-         	 i=0;	
-           OutVoltageDetFlag=2;						
+						}while(i<5);	
+//强制赋值，使检测外部电压通过					
+					if(i>=5)
+					{
+						 i=0;	
+						 OutVoltageDetFlag=2;	
+					}						
 	    }	  			 
    }
 }

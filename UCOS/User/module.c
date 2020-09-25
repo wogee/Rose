@@ -108,7 +108,7 @@ void ModuleMain (void)
 		
 		 if(ChargerMsg.ChargeStage==7)                                                              // 充电状态
 		  {
-				if((BMSMessage.ChargeSuspendTime<10*60)&&(BMSMessage.BatteryChgAlow	=0x10))             //充电暂停10分钟
+				if((BMSMessage.ChargeSuspendTime<(10*60))&&(BMSMessage.BatteryChgAlow	=0x10))             //充电暂停10分钟
 				{
 						if(ChargerMsg.PreCharge==0)                                                         //预充流程                                        
 						{
@@ -138,7 +138,7 @@ void ModuleMain (void)
 								     ModuleSet(1, BMSMessage.RequestVoltage, BMSMessage.RequestCurrent*10/ModuleMsg.NOcount,ModuleMsg.ModuleType);         //正常充电
 									  if(BMSMessage.RequestVoltage*BMSMessage.RequestCurrent*10>=BMSMessage.RequestVoltage*ModuleMsg.MAXCurrent*10*ModuleMsg.NOcount)
 										{
-												ChargerDivider50(BMSMessage.RequestVoltage,BMSMessage.RequestCurrent);				    //发送功率分配申请			
+												ChargerDivider50(BMSMessage.RequestVoltage,BMSMessage.RequestCurrent);				                                     //发送功率分配申请			
 										}
 								}
 								else if(PowerDividerFlag==1){//切换
@@ -148,7 +148,7 @@ void ModuleMain (void)
 								}
 						}
 				}					 
-				else if(BMSMessage.ChargeSuspendTime>10*60)                                            //充电暂停超过10分钟
+				else if(BMSMessage.ChargeSuspendTime>(10*60))                                            //充电暂停超过10分钟
 				{
 					ChargerMsg.ChargeStage=8;
 				}
