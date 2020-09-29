@@ -257,22 +257,12 @@ static void BMS_CSD(void);
 static void BMS_CEM(uint32_t  err);
 static void BMS_RECData_Pro(void);
 
-void BMSDelay(uint32_t n)
-{
-	while(n>1)
-	{
-	   n--;
-	 }
-
-}
-
 void ChargerMsgInit(void)
 {
 	 ChargerMsg.ChargeStage=0; //阶段清零
    InsulationFlag    = 0;    //绝缘检测状态清零
    OutVoltageDetFlag = 0;	   //外部电压检测清零
-	 ChargerMsg.PreCharge=0;   //预充标识
-	
+	 ChargerMsg.PreCharge=0;   //预充标识	
 	 ChargerMsg.CHMcnt=0;      //计数器清零
 	 ChargerMsg.CRMcnt=0;
 	 ChargerMsg.CMLcnt=0;
@@ -281,8 +271,7 @@ void ChargerMsgInit(void)
 	 ChargerMsg.BCLcnt=0;
 	 ChargerMsg.BCScnt=0;	
 	 ChargerMsg.CCScnt=0;
-	 ChargerMsg.CSTcnt=0;
-	
+	 ChargerMsg.CSTcnt=0;	
 	 ChargerMsg.CEMcnt=0;	
 	 ChargerMsg.MAXVoltage=7500;
 	 ChargerMsg.MINVoltage=2000;
@@ -290,20 +279,18 @@ void ChargerMsgInit(void)
    ChargerMsg.MINCurrent=0;		
 	 ChargerMsg.ChargedTime=0;       //时间清零
 	 ChargerMsg.StopReason=0;        //充电机停止原因清零
-
-		ChargerMsg.StartCompleteflag=0;  //启动成功标志
-  	ChargerMsg.StopCompleteflag=0;  //停止成功标志
-	
+	 ChargerMsg.StartCompleteflag=0;  //启动成功标志
+   ChargerMsg.StopCompleteflag=0;  //停止成功标志	
    ChargerMsg.SE12SwitchFlag=0;
 	 ChargerMsg.DCSwitchFlag=0;
 	 BMSMessage.BHMflag=0;	   //收到BHM报文	 
 	 BMSMessage.BRMflag=0;	   //收到BRM报文
-	 BMSMessage.BCPflag=0;	   //收到BCP报文
+	 BMSMessage.BCPflag=0;	   //收到BCP报文	 
 	 BMSMessage.BROflag=0;	   //收到BRO就绪报文标志
 	 BMSMessage.BCLflag=0;     //收到BCL报文
+	 BMSMessage.BCL1flag=0;    //首次收到BCL报文	 
 	 BMSMessage.BCSflag=0;	   //收到BCS报文
-	 BMSMessage.BCS1flag=0;	   //首次收到BCS报文	
-	 
+	 BMSMessage.BCS1flag=0;	   //首次收到BCS报文		 
 	 BMSMessage.ChargeSuspendTime=0;  //充电中暂停时间清零
 }
 
@@ -320,8 +307,7 @@ void ChargeStop(void)
 
 void BMSMain (void)
 {	
-	  ChargerMsgInit();
-		
+	  ChargerMsgInit();		
   while (1) 
  {							
     OSTimeDlyHMSM(0,0,0,1);	
@@ -334,8 +320,7 @@ void BMSMain (void)
 	   ChargerMsg.ChargeStage=0;
 	 	 //未插枪，做插枪提示
 	 }		 
-		BMS_RECData_Pro();                                                                 // 处理充电桩过来的数据 ，主要是被动处理函数 
-	 	 
+		BMS_RECData_Pro();                                                                 // 处理充电桩过来的数据 ，主要是被动处理函数 	 	 
 	switch (ChargerMsg.ChargeStage)
 	{
     case 1: 	
@@ -348,9 +333,7 @@ void BMSMain (void)
 				  AC_SWITCH_ON();                                                              //吸合交流接触器	
 					OSTimeDlyHMSM(0,0,1,0);
 		      ChargerMsg.ChargeStage=2;
-
-		     break;
-		
+		     break;		
 		case 2:	 	                                                                         //定期发送协议版本			
 			   ChargerMsg.CHMcnt++;
 		     if((ChargerMsg.CHMcnt%250)==0)                                                //电池充电总状态，250ms发送一次  
@@ -362,11 +345,9 @@ void BMSMain (void)
 					 {
 					   ChargerMsg.ChargeStage=8;
 					 }					
-	       break; 				
-				
+	       break; 								
 	  case 3:				                                                                      //定期发送开始握手报文
-	   		 ChargerMsg.CRMcnt++;
-			
+	   		 ChargerMsg.CRMcnt++;			
          if(ChargerMsg.CRMcnt<5*1000)			
 				 {
 		       if(BMSMessage.BRMflag==0)
@@ -381,9 +362,8 @@ void BMSMain (void)
 						{
 						  BMS_CEM(0xfdf0c0fc);                                                     // DN.1001 DN.1002 DN.1003 接收BMS辨识报文超时
 							ChargerMsg.ChargeStage=9;
-						}							
-											
-					break;
+						}																		
+					break;						
 	 	 case 4:	
 			 	    ChargerMsg.CRMcnt++;
           	if(ChargerMsg.CRMcnt<5*1000)
@@ -397,21 +377,18 @@ void BMSMain (void)
 						{
 									BMS_CEM(0xfcf1c0fc); 
 					        ChargerMsg.ChargeStage = 9;							
-						}	
-		     
-					break;
-						
+						}			     
+					break;						
 		 case 5:				                                                                   //定期发送最大输出能力报文	
 							ChargerMsg.CMLcnt++;
 							ChargerMsg.CTScnt++;
-
 		 					if(ChargerMsg.CTScnt<5*1000)
 								{
 					       if(BMSMessage.BCPflag==1)
 						      {
 							    	if((ChargerMsg.CMLcnt%250)==0)             
 									   {       
-									   	BMS_CML();
+									   	   BMS_CML();
 									    }	
 								    if((ChargerMsg.CTScnt%500)==0)            
 								    	{       
@@ -420,67 +397,66 @@ void BMSMain (void)
 								   }
 								}
              else if	(ChargerMsg.CTScnt>=5*1000)	                                    //DN.2003 DN.2004 DN.2006 接收BMS完成充电准备超时               
-							 {
-							
+							 {							
 					          BMS_CEM(0xfcf4c0fc); 	
 					          ChargerMsg.ChargeStage = 9;								 
-							 }									
-													
-							break;										
-		case 6:	 	                                                                        // 定期发送握手状态报文
-			      ChargerMsg.CROcnt++;	 	
-		
+							 }																						
+							break;								 
+		case 6:	 	                                                                                        // 定期发送握手状态报文
+			      ChargerMsg.CROcnt++;	 			
 					if(ChargerMsg.CROcnt<60*1000)	
-					{		
-               if((BMSMessage.BCLflag==0)&&(BMSMessage.BCS1flag==0))                     //BCL和BCS都没接收到时
+					{								
+               if((BMSMessage.BCL1flag==0)&&(BMSMessage.BCS1flag==0))                                  //BCL和BCS都没接收到时
 							 {
 									switch (OutVoltageDetFlag) 
 									{
-										 case 0:	
-												if((ChargerMsg.CROcnt%250)==0)                                                //电池充电总状态，250ms发送一次  
+										 case 0:									 
+														BMS_CRO(0x00);
+                            OutVoltageDetFlag=1;													 												 											 												 
+												 break;					
+										 case 1:	
+												if((ChargerMsg.CROcnt%250)==0)                                               
 												 {									 
 														BMS_CRO(0x00);
-                            OutVoltageDetFlag=1;													 
-												 }											 
-												 
-												 break;
-										 
-											case 2:
+												 }	
+												 break; 
+										 case 2:
 												if((ChargerMsg.CROcnt%250)==0)                                                //电池充电总状态，250ms发送一次  
-												 {     		
-													 BMS_CRO(0xaa);
-													 ChargerMsg.ChargeStage=7;	
-                           ChargerMsg.CROcnt=0;													
+												 {
+                           if(BMSMessage.BROflag==2)	                                        //若一直为准备完成，则一直发CRO=0x00。     
+													 {														 
+															 BMS_CRO(0xaa);
+															 ChargerMsg.ChargeStage=7;	
+															 ChargerMsg.CROcnt=0;	
+													 } 
+													 else{														 
+													     BMS_CRO(0x00);
+													 }														 
 													}							      
-												 break;
-											
+												 break;											
 											case 3:
 												 //检测汽车电压是否误差是否超过5%
-												 break;
-											
+												 break;											
 											default:
 													break;									
 										}
-							  	}								
-																													 
+							  	}																																					 
 						 }	
 					 else if(ChargerMsg.CROcnt>=60*1000)                                         //DN.2005 接收BMS完成充电准备超时    
 						 {			
-                  if(BMSMessage.BROflag!=1)	
+                  if(BMSMessage.BROflag!=2)	
 									{										
 							      BMS_CEM(0xfcf4c0fc);
 					          ChargerMsg.ChargeStage = 9;										
 									}										
-							}
-								 				
-          break;		
-				
-		case 7:
+							}								 				
+          break;						
+		case 7:                                                                               //充电阶段 
 			      ChargerMsg.CROcnt++;	
-			      ChargerMsg.CCScnt++;                                                      //充电阶段 
+			      ChargerMsg.CCScnt++;                                                      
 		        ChargerMsg.BCLcnt++; 	
             ChargerMsg.BCScnt++; 		
-		      if((BMSMessage.BCL1flag==0)||(BMSMessage.BCS1flag==0))
+		      if((BMSMessage.BCL1flag==0)||(BMSMessage.BCS1flag==0))                          //首次的BCL1和BCS1只要一个接收到，则进入
 		      {
 						if((ChargerMsg.CROcnt%250)==0)                                                //电池充电总状态，250ms发送一次  
 				    {									 
@@ -502,57 +478,60 @@ void BMSMain (void)
 				         	 ChargerMsg.ChargeStage = 9;									
 								}	
 				      }							
-		      }
-					
+		      }					
 					else if((BMSMessage.BCL1flag==1)&&(BMSMessage.BCS1flag==1))
 		      {
 						if(ChargerMsg.BCLcnt>1000)                                                  // DN.3006 DN.3008 接收到BCL中断
 						{
 							 BMS_CEM(0xfcf4c0fc); 
 							 ChargerMsg.ChargeStage = 9;
-						}
-						
+						}						
 						if(ChargerMsg.BCScnt>5*1000)                                                // DN.3005 DN.3007 接收到BCS中断
 						{															
 							 BMS_CEM(0xfcf4c0fc); 	
                ChargerMsg.ChargeStage = 9;							
+						}												
+					}										
+	       break;					
+		case 8:                                                                          
+					ChargerMsg.CSTcnt++;         
+					ChargerMsg.BSDcnt++;			
+				 if(BMSMessage.BSTflag==0)                                                         //主动停机
+				 {
+						if((ChargerMsg.CSTcnt%10)==0)                                                  //电池充电总状态，250ms发送一次  
+						{ 			
+							BMS_CST(ChargerMsg.StopReason);									
+						}	
+						if(ChargerMsg.CSTcnt>=5*1000) 
+						{
+							 BMS_CEM(0xfcf4c0fc); 	
+							if(ChargerMsg.DCSwitchFlag==1)
+								{						
+									LOCK_SWITCH_OFF();
+									ChargerMsg.DCSwitchFlag=0;
+									ChargerMsg.ChargeStage = 9;								
+								}
 						}
-												
 					}
-										
-	       break;
-					
-		case 8:                                                                           //主动停机
-			  ChargerMsg.CSTcnt++;         
-			  ChargerMsg.BSDcnt++;	
-		
-		 if(BMSMessage.BSTflag==0)
-		 {
-		    if((ChargerMsg.CSTcnt%10)==0)                                                 //电池充电总状态，250ms发送一次  
-		    { 			
-			  	BMS_CST(ChargerMsg.StopReason);									
-				}	
-				if(ChargerMsg.CSTcnt>=5*1000) 
-				{
-					 BMS_CEM(0xfcf4c0fc); 	
-					if(ChargerMsg.DCSwitchFlag==1)
+				 else if(BMSMessage.BSTflag==1)                                                     //被动停机
+				 {
+					 	if((ChargerMsg.DCSwitchFlag==1)&&(ChargerMsg.ChargeCurrent<=50))                                      
 						{						
 							LOCK_SWITCH_OFF();
-			        ChargerMsg.DCSwitchFlag=0;
-	            ChargerMsg.ChargeStage = 9;								
-						}
-				}
-			}
-		 else if(BMSMessage.BSTflag==1)
-     {			 
-				if(ChargerMsg.BSDcnt>=10*1000) 
-				{
-					BMS_CEM(0xfcf4c0fc); 	
-					ChargerMsg.ChargeStage = 9;
-				}				
-			}											
-	       break;		
-				
+							ChargerMsg.DCSwitchFlag=0;
+							ChargerMsg.ChargeStage=9;					
+						 }
+						if((ChargerMsg.CSTcnt%10)==0)                                                   //电池充电总状态，250ms发送一次  
+						{ 			
+							BMS_CST(ChargerMsg.StopReason);									
+						}						 
+						if(ChargerMsg.BSDcnt>=10*1000) 
+						{
+							BMS_CEM(0xfcf4c0fc); 	
+							ChargerMsg.ChargeStage = 9;
+						}				
+					}											
+				 break;						
 		case 9:		
          if(ChargerMsg.DCSwitchFlag==1)
 				 {
@@ -565,15 +544,12 @@ void BMSMain (void)
 	      	OSTimeDlyHMSM(0,0,1,0);			
 					AC_SWITCH_OFF();                                                            //断开交流接触器
 					ChargerMsg.ChargeStage=10;
-	       break;
-		
+	       break;		
     case 10:                                                                          //结束充电
 		      ChargeStop();			
-	       break;
-				
+	       break;				
 		default:
-         break;	
-		
+         break;			
 	 }	
  }	
 }
@@ -597,8 +573,7 @@ void BMS_CHM(void)
 	 CAN_Data[4]=0x00;  
 	 CAN_Data[5]=0xff;
 	 CAN_Data[6]=0xff;  
-	 CAN_Data[7]=0xff;	
-	
+	 CAN_Data[7]=0xff;		
 	 WriteCAN0(8,1, CANID,CAN_Data);	 
 }	
 
@@ -627,8 +602,7 @@ void BMS_CHM(void)
 	 CAN_Data[5]=((4000-ChargerMsg.MAXCurrent)>>8)&0xff;  
 	 CAN_Data[6]=(4000-ChargerMsg.MINCurrent)&0xff;    
 	 CAN_Data[7]=((4000-ChargerMsg.MINCurrent)>>8)&0xff;  	
-	 WriteCAN0(8,1, CANID,CAN_Data);	
-	
+	 WriteCAN0(8,1, CANID,CAN_Data);		
 }
 
 void BMS_CRO(uint8_t data)	           	// 电池参数 动力蓄电池充电参数报文 aa
@@ -647,8 +621,7 @@ void BMS_CRO(uint8_t data)	           	// 电池参数 动力蓄电池充电参数报文 aa
 
 void BMS_DataAnswerHead(uint8_t packlen,uint16_t png)    //充电机收到BMS发送的RTS报文后，作出应答信号，回复CTS给BMS  参数配置阶段 
 {
-	CANID=0x1CECF456  ;               //11 02 01 FF FF 00 06 00
- 
+	 CANID=0x1CECF456  ;               //11 02 01 FF FF 00 06 00 
 	 CAN_Data[0]=0x11 ;
 	 CAN_Data[1]=packlen ;
 	 CAN_Data[2]=0x01 ;
@@ -662,8 +635,7 @@ void BMS_DataAnswerHead(uint8_t packlen,uint16_t png)    //充电机收到BMS发送的RT
 
 void BMS_DataAnswerEnd(uint8_t datalen,uint16_t png)    //充电机收到BMS发送的RTS报文后，作出应答信号，回复CTS给BMS  参数配置阶段 
 {
-	CANID=0x1CECF456  ;               //11 02 01 FF FF 00 06 00
- 
+	 CANID=0x1CECF456  ;               //11 02 01 FF FF 00 06 00 
 	 CAN_Data[0]=0x13 ;
 	 CAN_Data[1]=datalen ;
 	 CAN_Data[2]=0x00 ;
@@ -672,8 +644,7 @@ void BMS_DataAnswerEnd(uint8_t datalen,uint16_t png)    //充电机收到BMS发送的RTS
 	 CAN_Data[5]= png&0xff ;
 	 CAN_Data[6]= png/0xff ;
 	 CAN_Data[7]=0x00 ;  			
-	 WriteCAN0(8,1, CANID,CAN_Data);
-	
+	 WriteCAN0(8,1, CANID,CAN_Data);	
 }
 
 void BMS_CCS(void)		
@@ -698,7 +669,6 @@ void BMS_CST(uint32_t reason)
 	 CAN_Data[3]=(reason>>24)&0xff;        //充电机中止充电错误原因
 	 WriteCAN0(4,1, CANID,CAN_Data);
 }
-
  
 void BMS_CSD(void)		
 {
@@ -711,9 +681,7 @@ void BMS_CSD(void)
 	 CAN_Data[5]=0x3d ;
 	 CAN_Data[6]=0x3e ;
 	 WriteCAN0(8,1, CANID,CAN_Data);
-
 }
-
 
 void BMS_CEM(uint32_t err)	
 {
@@ -723,9 +691,7 @@ void BMS_CEM(uint32_t err)
 	 CAN_Data[2]=(err>>8)&0xff ;
 	 CAN_Data[3]=err&0xff ;
 	 WriteCAN0(4,1, CANID,CAN_Data);
-
 }	
-
 
 void BHM_Analyse(void)	
 {
@@ -748,7 +714,6 @@ void BHM_Analyse(void)
 				  ChargerMsg.InsuCurrent=10;                      //界定绝缘检测电流
 			 
 			 /**  充电桩检测K1，K2外侧电压小于10V，正常了就进行绝缘检测 **/
-
 			 		if(InsulationFlag==3)
 					{
 			 			 ChargerMsg.ChargeStage=3;
@@ -759,66 +724,59 @@ void BHM_Analyse(void)
 }		
 
 void DataPackCEC_Analyse(void)	
-{
-				
-							if((ChargerMsg.ChargeStage==3)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x200))
-							 {	    
-											BMSMessage.BRMflag= 1 ; 
-								      BMSMessage.BRMdatalen=(MessageCAN0.DATAA>>8)&0xff;
-                      BMSMessage.BRMPackCount=MessageCAN0.DATAA>>24;
-                      BMSMessage.BRMPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-								      BMS_DataAnswerHead(BMSMessage.BRMPackCount,BMSMessage.BRMPNG);								 
-								}	
-							  			
-      					if((ChargerMsg.ChargeStage==4)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x600))
-								{
-									    BMSMessage.BCPflag=1;									
-								      BMSMessage.CFGdatalen=(MessageCAN0.DATAA>>8)&0xff;
-                      BMSMessage.CFGPackCount=MessageCAN0.DATAA>>24;
-                      BMSMessage.CFGPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-								      BMS_DataAnswerHead(BMSMessage.CFGPackCount,BMSMessage.CFGPNG);
-
-								}
-      					if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1100))
-								{
-                      ChargerMsg.StartCompleteflag=1;									
-										  BMSMessage.BCSflag=1;
-								    	BMSMessage.BCS1flag=1;
-									    ChargerMsg.BCScnt = 0;
-								      BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
-                      BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
-                      BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-								      BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
-								}
-								
-      					else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1500))
-								{					
-                      BMSMessage.BCSdataflag=1;									
-								      BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
-                      BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
-                      BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-								      BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
-								}
-      					else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1600))
-								{	
-									    BMSMessage.BCSdataflag=2;
-								      BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
-                      BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
-                      BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-								      BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
-								}
-								else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1700))
-								{	
-									    BMSMessage.BCSdataflag=3;
-								      BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
-                      BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
-                      BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-								      BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
-								}	
-
-			 
+{				
+		 if((ChargerMsg.ChargeStage==3)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x200))
+		 {	    
+						BMSMessage.BRMflag= 1 ; 
+						BMSMessage.BRMdatalen=(MessageCAN0.DATAA>>8)&0xff;
+						BMSMessage.BRMPackCount=MessageCAN0.DATAA>>24;
+						BMSMessage.BRMPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+						BMS_DataAnswerHead(BMSMessage.BRMPackCount,BMSMessage.BRMPNG);								 
+			}							
+			else if((ChargerMsg.ChargeStage==4)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x600))
+			{
+						BMSMessage.BCPflag=1;									
+						BMSMessage.CFGdatalen=(MessageCAN0.DATAA>>8)&0xff;
+						BMSMessage.CFGPackCount=MessageCAN0.DATAA>>24;
+						BMSMessage.CFGPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+						BMS_DataAnswerHead(BMSMessage.CFGPackCount,BMSMessage.CFGPNG);
+			}
+			else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1100))
+			{
+						ChargerMsg.StartCompleteflag=1;									
+						BMSMessage.BCSflag=1;
+						BMSMessage.BCS1flag=1;
+						ChargerMsg.BCScnt = 0;
+						BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
+						BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
+						BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+						BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
+			}			
+			else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1500))
+			{					
+						BMSMessage.BCSdataflag=1;									
+						BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
+						BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
+						BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+						BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
+			}
+			else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1600))
+			{	
+						BMSMessage.BCSdataflag=2;
+						BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
+						BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
+						BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+						BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
+			}
+			else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1700))
+			{	
+						BMSMessage.BCSdataflag=3;
+						BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
+						BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
+						BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+						BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
+			}				 
 }		
-
 
 void DataPackCEB_Analyse(void)	
 {
@@ -835,8 +793,7 @@ void DataPackCEB_Analyse(void)
 							 BMS_DataAnswerEnd(BMSMessage.BRMdatalen,BMSMessage.BRMPNG);	
                BMS_CRM(0xAA);
                ChargerMsg.CRMcnt=0;	
-               ChargerMsg.ChargeStage = 4;	
-   						 
+               ChargerMsg.ChargeStage = 4;	   						 
 						 }				
 						 break;
 				case 4:	
@@ -849,10 +806,8 @@ void DataPackCEB_Analyse(void)
 							 BMS_DataAnswerEnd(BMSMessage.CFGdatalen,BMSMessage.CFGPNG);	
 						   BMS_CTS();									 
 						   BMS_CML();		
-						   ChargerMsg.ChargeStage = 5;	
-						 
+						   ChargerMsg.ChargeStage = 5;							 
 						 }
-
 						 break;
 				case 7:
 					  if(BMSMessage.BCSflag==1)
@@ -872,12 +827,10 @@ void DataPackCEB_Analyse(void)
 							 }	
                 BMSMessage.BCSdataflag=0;							 
 						}							
-
 							 break;
 				default:
 					     break;								
-			 }	
-       
+			 }	       
 			 BMSMessage.SoftVersion=BatterMessage[1]*0xff+BatterMessage[0];			 
 }
 
@@ -887,25 +840,27 @@ void BRO_Analyse(void)
 		 {
 			 if((MessageCAN0.DATAA&0xff)==0xaa)
 			 {
-				 BMSMessage.BROflag=1;
-				 ChargerMsg.ChargeStage=6 ;
-			 }
+				 BMSMessage.BROflag=2;
+			 }else{
+				  BMSMessage.BROflag=1;
+			 }				 
+				 ChargerMsg.ChargeStage=6 ;			 
 	   } 
 }
 
 void BCL_Analyse(void)	
 { 
-		  if(ChargerMsg.ChargeStage>=6)
-		 {         		     
-          BMS_CCS();			 
-	        BMSMessage.RequestVoltage = MessageCAN0.DATAA&0xffff;
-	        BMSMessage.RequestCurrent = 4000-((MessageCAN0.DATAA&0xffff0000)>>16);	
-	        BMSMessage.RequestChargeMode  = MessageCAN0.DATAB&0xff;	
-			 		BMSMessage.BCLflag=1; 
-			    BMSMessage.BCL1flag=1;
-			    ChargerMsg.CCScnt=0;
-			    ChargerMsg.BCLcnt=0;
-		 }
+		if(ChargerMsg.ChargeStage>=6)
+	 {         		     
+				BMS_CCS();			 
+				BMSMessage.RequestVoltage = MessageCAN0.DATAA&0xffff;
+				BMSMessage.RequestCurrent = 4000-((MessageCAN0.DATAA&0xffff0000)>>16);	
+				BMSMessage.RequestChargeMode  = MessageCAN0.DATAB&0xff;	
+				BMSMessage.BCLflag=1; 
+				BMSMessage.BCL1flag=1;
+				ChargerMsg.CCScnt=0;
+				ChargerMsg.BCLcnt=0;
+	 }
 }	
 
 void BSM_Analyse(void)	
@@ -915,38 +870,33 @@ void BSM_Analyse(void)
 	        BMSMessage.MAXSingleVoltageNO     = MessageCAN0.DATAA&0xff;
 	        BMSMessage.MAXBatteryTemp         = (MessageCAN0.DATAA>>8)&0xff;	
 	        BMSMessage.MAXBatteryTempNO       = (MessageCAN0.DATAA>>16)&0xff;
-			    BMSMessage.MINBatteryTemp         = (MessageCAN0.DATAA>>24)&0xff;
-			 
-			    BMSMessage.MINBatteryTempNO       = MessageCAN0.DATAB&0xff;			
-			 
+			    BMSMessage.MINBatteryTemp         = (MessageCAN0.DATAA>>24)&0xff;			 
+			    BMSMessage.MINBatteryTempNO       = MessageCAN0.DATAB&0xff;						 
 			    BMSMessage.SingleVoltageOHOL      = (MessageCAN0.DATAB>>8)&0x03;
            if (BMSMessage.SingleVoltageOHOL	==0x01)
 					 {
 					      ChargerMsg.StopReason=0xf0f40010;	
 						    ChargerMsg.ChargeStage=8;	
-					 }						 
-					 
-			    BMSMessage.SOCOHOL                = (MessageCAN0.DATAB>>8)&0x0c;	
+					 }						 					 
+			    BMSMessage.SOCOHOL = (MessageCAN0.DATAB>>8)&0x0c;	
            if (BMSMessage.SOCOHOL	==0x04)
 					 {
 					      ChargerMsg.StopReason=0xf0f40010;	
 						    ChargerMsg.ChargeStage=8;	
 					 }					 
-			    BMSMessage.BatteryOC              = (MessageCAN0.DATAB>>8)&0x30;
+			    BMSMessage.BatteryOC = (MessageCAN0.DATAB>>8)&0x30;
 					 if (BMSMessage.BatteryOC	==0x10)
 					 {
 					      ChargerMsg.StopReason=0xf0f40010;	
 						    ChargerMsg.ChargeStage=8;	
-					 }	
-					 
-			    BMSMessage.BatteryTempOH          = (MessageCAN0.DATAB>>8)&0xc0; 
+					 }						 
+			    BMSMessage.BatteryTempOH  = (MessageCAN0.DATAB>>8)&0xc0; 
            if (BMSMessage.BatteryTempOH	==0x40)
 					 {
 					      ChargerMsg.StopReason=0xf0f40010;	
 						    ChargerMsg.ChargeStage=8;	
-					 }
-					 
-			    BMSMessage.BatteryInsuFlag        = (MessageCAN0.DATAB>>16)&0x03;	
+					 }					 
+			    BMSMessage.BatteryInsuFlag  = (MessageCAN0.DATAB>>16)&0x03;	
            if (BMSMessage.BatteryInsuFlag	==0x01)
 					 {
 					      ChargerMsg.StopReason=0xf0f40010;	
@@ -957,9 +907,8 @@ void BSM_Analyse(void)
 					 {
 					      ChargerMsg.StopReason=0xf0f40010;	
 						    ChargerMsg.ChargeStage=8;	
-					 }
-					 
-			    BMSMessage.BatteryChgAlow         = (MessageCAN0.DATAB>>16)&0x30;	
+					 }					 
+			    BMSMessage.BatteryChgAlow   = (MessageCAN0.DATAB>>16)&0x30;	
 					 if ((BMSMessage.BatteryChgAlow	== 0x10)&&(ChargerMsg.DCSwitchFlag==1))                       //充电允许，正在充电的情况下  时间清零  否则时间继续累加
 					 {
              BMSMessage.ChargeSuspendTime=0;
@@ -972,7 +921,6 @@ void BSM_Analyse(void)
 						     ChargerMsg.PreCharge=0;
 					 }						 			 			 
 		 }
-
 }	
 
 void BST_Analyse(void)	
@@ -982,20 +930,14 @@ void BST_Analyse(void)
 		{
        ChargerMsg.ChargeStage=8;
 			 BMSMessage.BSTflag=1;
-			 BMS_CST(ChargerMsg.StopReason);
-			if((ChargerMsg.DCSwitchFlag==1)&&(ChargerMsg.ChargeCurrent<=50))                                      
-				{						
-					LOCK_SWITCH_OFF();
-				  ChargerMsg.DCSwitchFlag=0;
-          ChargerMsg.ChargeStage=9;					
-				 }							
+			 BMS_CST(ChargerMsg.StopReason);							
 		}		
 }	
 
 void BSD_Analyse(void)	
 {    	
 	      ChargerMsg.BSDcnt=0;
-			   BMS_CSD();							
+			  BMS_CSD();							
 }	
 
 void BEM_Analyse(void)	
@@ -1015,16 +957,15 @@ void BMS_RECData_Pro(void)
   	if(prMsgCAN0==&MsgCAN0BUF[CAN0_MSG_NUMBER-1])     /* 预留一个存储单元不存储，防止写指针指向最后一个存储单元时，读指针递增时溢出    */
 	  {
 			MessageCAN0 = *prMsgCAN0;
-		  memset(prMsgCAN0,0,sizeof(*prMsgCAN0));       /*处理完一帧数据，就丢掉该包数据                                                 */			
-			prMsgCAN0=MsgCAN0BUF;			                     /* 调整指针指向 ，由尾巴指向开始                                                 */
+		  memset(prMsgCAN0,0,sizeof(*prMsgCAN0));         /*处理完一帧数据，就丢掉该包数据                                                 */			
+			prMsgCAN0=MsgCAN0BUF;			                      /* 调整指针指向 ，由尾巴指向开始                                                 */
 	  }
 	  else                                             
 		{
 	     MessageCAN0 = *prMsgCAN0;
-		   memset(prMsgCAN0,0,sizeof(*prMsgCAN0));       /*处理完一帧数据，就丢掉该包数据                                                 */
-		   prMsgCAN0 ++;                                 /*指针递增必须放在最后，防止指针递增后进行重复的if处理                           */
-	  }
-			
+		   memset(prMsgCAN0,0,sizeof(*prMsgCAN0));        /*处理完一帧数据，就丢掉该包数据                                                 */
+		   prMsgCAN0 ++;                                  /*指针递增必须放在最后，防止指针递增后进行重复的if处理                           */
+	  }			
 	switch(MessageCAN0.CANID)
 	 {
 		 case 0x182756F4:			      

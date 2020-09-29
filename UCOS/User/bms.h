@@ -37,10 +37,9 @@ typedef struct _MessageBMS
 	  uint8_t   SOC;                  // SOC
     uint16_t  MAXVoltage;           // 最高允许电压
 	  uint16_t  MAXCurrent;	          // 最高允许电流
-	  uint16_t  BatteryVoltage;       // 电池电压
-		
+	  uint16_t  BatteryVoltage;       // 电池电压		
 //需求参数	
-    uint8_t   BROflag;
+		uint8_t   BROflag;              //BMS准备就绪 0=未收到BRO，1=收到收到BRO=0x00，2=收到BRO=0xAA
     uint16_t  RequestVoltage;       // 需求电压
 	  uint16_t  RequestCurrent;       // 需求电流
 		uint8_t   RequestChargeMode;    // 需求充电模式 
@@ -48,10 +47,8 @@ typedef struct _MessageBMS
 		uint8_t   BCL1flag;             // 首次接收到BCL标志
 		uint8_t   BCS1flag;             // 首次接收到BCS标志
     uint8_t   BCSflag;		          // 接收BCS标志
-    uint8_t   BCSdataflag;			
-		
+    uint8_t   BCSdataflag;					
 //车状态参数		
-
     uint8_t   MAXSingleVoltageNO;	  // 最高单体电压编号
     uint8_t   MAXBatteryTemp;	      // 最高电池温度
     uint8_t   MAXBatteryTempNO;	    // 最高电池温度编号		
@@ -65,7 +62,6 @@ typedef struct _MessageBMS
 		uint8_t   BatteryCnetFlag;		  // 连接器状态
 		uint8_t   BatteryChgAlow;       // 充电允许
 		uint16_t  ChargeSuspendTime;    // 充电暂停时间
-
 //测量数据
 		uint16_t  BCSdetVoltage;	      // 汽车测量充电电压
 	  uint16_t  BCSdetCurrent;        // 汽车测量充电电流		
@@ -80,11 +76,8 @@ typedef struct _MessageBMS
 	  uint8_t   CS;                   // 校验位
 //停止数据原因	
     uint8_t   BSTflag;
-    uint8_t   BSDflag;
-		
-		
+    uint8_t   BSDflag;				
 }BMSMsg;
-
 
 extern BMSMsg BMSMessage;
 
@@ -95,14 +88,12 @@ typedef struct _MessageCharger
      uint16_t  ChargeCurrent; 
 	   uint32_t  ChargerEnergy;
 	   uint16_t  ChargedTime;
-
      uint16_t  InsuVoltage;           // 绝缘检测电压
 	   uint16_t  InsuCurrent;	          // 绝缘检测电流	
      uint16_t  MAXVoltage;            // 最高允许电压
      uint16_t  MINVoltage;            // 最高允许电压	
 	   uint16_t  MAXCurrent;	          // 最高允许电流
-	   uint16_t  MINCurrent;	          // 最高允许电流
-	
+	   uint16_t  MINCurrent;	          // 最高允许电流	
      uint16_t  CHMcnt;
      uint16_t  CRMcnt;
      uint16_t  CMLcnt;
@@ -121,12 +112,10 @@ typedef struct _MessageCharger
 		 uint8_t   StartCompleteflag;    //启动成功标志
      uint8_t   StopCompleteflag;     //停止成功标志
 	   uint8_t   PreCharge;		 		     //预充标志
-	   uint32_t  StopReason;	
-	
+	   uint32_t  StopReason;		
 }ChargeMsg;
 
 extern ChargeMsg ChargerMsg;
-
 
 extern void BMSMain(void);
 

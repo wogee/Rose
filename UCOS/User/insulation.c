@@ -80,9 +80,9 @@ void InsulationMain (void)
 //							}
 //						 else
 //							OutVoltageDetFlag=3;
-						}while(i<5);	
+						}while(i<3);	
 //强制赋值，使检测外部电压通过					
-					if(i>=5)
+					if(i>=3)
 					{
 						 i=0;	
 						 OutVoltageDetFlag=2;	
