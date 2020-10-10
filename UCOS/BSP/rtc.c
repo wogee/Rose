@@ -12,7 +12,7 @@
 #include <rtc.h>
 
 
-uint16_t ScnTime;
+uint32_t ScnTime;
 uint16_t InsulationTime;
 uint32_t ChargedTime;
 uint32_t ulTimes;
@@ -104,26 +104,21 @@ void  RTC_IRQHandler (void)
 	RTCtimedate.week  	= (ulTimes >> 24) & 0x07; 
 	RTCtimedate.hour  	= (ulTimes >> 16) & 0x1f;
 	RTCtimedate.minute	= (ulTimes >> 8) & 0x3f;
-	RTCtimedate.second	=  ulTimes & 0x3f;
-	
+	RTCtimedate.second	=  ulTimes & 0x3f;	
 	LPC_RTC->ILR = 0x01;															                          /* 清除中断标志                 */			
 	
-	ScnTime++; 	
-													                                    //延时计时
+	ScnTime++; 														                                       //延时计时
 	InsulationTime++;	
-  ChargerMsg.ChargedTime++;
-	BMSMessage.ChargeSuspendTime++;
-	
+	BMSMessage.ChargeSuspendTime++;	
+	if((ScnTime%60)==0)
+	{
+   ChargerMsg.ChargedTime++;
+	}
 	if(tmp++%2)
 	{
-		SYSLED_ON();
-							
+		SYSLED_ON();							
 	}	else 
-	{
-		
-	SYSLED_OFF();
-				
+	{		
+	SYSLED_OFF();				
 	}
-	
-
 }

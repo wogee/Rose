@@ -41,8 +41,9 @@ void ModuleMain (void)
 	MonitorMsg.Cnt = 0;
 	ModuleMsg.StartFlag = 0;                                                       // 开机标识
 	ChargerMsg.PreCharge= 0;
-	ModuleMsg.NOcount = 1;
-  ModuleMsg.ModuleType=0;
+	//tudo
+	ModuleMsg.NOcount = 1;    //模块数量
+  ModuleMsg.ModuleType=0;   //模块类型
 	
   while (1) 
  {	 
@@ -58,14 +59,14 @@ void ModuleMain (void)
  //       国网模块三统一的程序	
 	if (((ModuleMsg.Cnt%200)==0)&&(ModuleMsg.ModuleType==0))	                         //心跳
 	{	 	 
-		ModuleSet(4,0,0,0);	 
+		ModuleSet(5,0,0,0);	 
 	}
 	 
 	if ((ModuleMsg.Cnt%25)==0)	 
 	{
-		   if(ChargerMsg.ChargeStage==2)                                               // 绝缘检测状态
-		   {		
-				   if(BMSMessage.MAXVoltage<=ChargerMsg.MAXVoltage)                        //界定绝缘检测电压
+					 if(ChargerMsg.ChargeStage==2)                                               // 绝缘检测状态
+					 {
+							 if(BMSMessage.MAXVoltage<=ChargerMsg.MAXVoltage)      //界定绝缘检测电压
 							 {
 									ChargerMsg.InsuVoltage=BMSMessage.MAXVoltage;
 									if(ChargerMsg.InsuVoltage<=2000)
@@ -75,16 +76,15 @@ void ModuleMain (void)
 							 {
 									ChargerMsg.InsuVoltage=ChargerMsg.MAXVoltage;			 
 							 }
-				       ChargerMsg.InsuCurrent=ModuleMsg.NOcount*200;                        //界定绝缘检测电流
-				 
+							 ChargerMsg.InsuCurrent=ModuleMsg.NOcount*200;                                             //界定绝缘检测电流					 			 
 							if(	ModuleMsg.StartFlag == 0)
 							 {
-  								ModuleSet(2,ChargerMsg.InsuVoltage,ModuleMsg.NOcount*200,ModuleMsg.ModuleType);	     // 开机绝缘检测
+  								ModuleSet(2,ChargerMsg.InsuVoltage,ChargerMsg.InsuCurrent,ModuleMsg.ModuleType);	     // 开机绝缘检测
 								 	OSTimeDlyHMSM(0,0,0,20);
-								 	ModuleMsg.StartFlag=1;                                                               // 开机标识
+								 	ModuleMsg.StartFlag=1;                                                                 // 开机标识
 							 } 
-             else{
-                  ModuleSet(1,ChargerMsg.InsuVoltage,ModuleMsg.NOcount*200,ModuleMsg.ModuleType);	
+              else{
+                  ModuleSet(1,ChargerMsg.InsuVoltage,ChargerMsg.InsuCurrent,ModuleMsg.ModuleType);	     //开机后修改电压 电流
 						      }							 
 							 if((ChargerMsg.InsuVoltage-ModuleMsg.OutVoltage)<=100)
 							 {
@@ -93,13 +93,13 @@ void ModuleMain (void)
 											 DC_SWITCH_ON();						
 							         ChargerMsg.DCSwitchFlag=1;
 											 InsulationFlag=1;
-											}  
-										 
+											}  										 
 							 }
                 if(InsulationFlag==2)
 										 {
-											  ModuleSet(3, 0, 0,0);
+											  ModuleSet(4, 0, 0,0);
 											  OSTimeDlyHMSM(0,0,1,0);
+											  ModuleMsg.StartFlag=0;
 											 	DC_SWITCH_OFF();						
 							          ChargerMsg.DCSwitchFlag=0;
 											  InsulationFlag=3;
@@ -118,11 +118,14 @@ void ModuleMain (void)
 								 }
 								 if(	ModuleMsg.StartFlag == 0)
 								 {
-										ModuleSet(2,BMSMessage.BatteryVoltage-50,ModuleMsg.NOcount*200,ModuleMsg.ModuleType);	// 开机预充
+										ModuleSet(3,BMSMessage.BatteryVoltage-50,ModuleMsg.NOcount*200,ModuleMsg.ModuleType);	// 开机预充
 										OSTimeDlyHMSM(0,0,0,20); 
 										ModuleMsg.StartFlag=1;                                            // 开机标识
 										AnalyseMT31();                                                    // 启动完成	
-								 }	            				 
+								 }
+                 else{
+								    ModuleSet(1,BMSMessage.RequestVoltage,BMSMessage.RequestCurrent*10/ModuleMsg.NOcount,ModuleMsg.ModuleType);
+								 }								 
 								 if((BMSMessage.BatteryVoltage-ModuleMsg.OutVoltage)<=100)
 								 {
 
@@ -151,15 +154,14 @@ void ModuleMain (void)
 				else if(BMSMessage.ChargeSuspendTime>(10*60))                                            //充电暂停超过10分钟
 				{
 					ChargerMsg.ChargeStage=8;
-				}
-			 	
+				}			 	
 	    }
 		
 			if((ChargerMsg.ChargeStage!=0)&&(ChargerMsg.ChargeStage!=2)&&(ChargerMsg.ChargeStage!=7))
 		  {
 				 if(ModuleMsg.StartFlag==1)
 				 { 
-					 ModuleSet(3, 0, 0,0);		
+					 ModuleSet(4, 0, 0,0);		
          }					 
 					if(ChargerMsg.DCSwitchFlag==0)
 					{
@@ -208,36 +210,36 @@ static void	Module_RECData_Pro(void)
 //        国网模块三统一的驱动程序		 8个模块
 
 						 case 0x1820a080 :               
-										ModuleMsg.OutVoltage=((MessageCAN1.DATAA&0xff00)>>8)+((MessageCAN1.DATAA&0xff0000)>>8);
-										ModuleCurrent[0]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
+										ModuleMsg.OutVoltage=  MessageCAN1.DATAA>>16;
+										ModuleCurrent[0]=  MessageCAN1.DATAB&0xffff;
 								 break ;
 						 
 						 case 0x1820a081 :               
-										ModuleCurrent[1]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
+										ModuleCurrent[1]=MessageCAN1.DATAB&0xffff;
 								 break ;
 						 
 						 case 0x1820a082 :               
-										ModuleCurrent[2]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
+										ModuleCurrent[2]=MessageCAN1.DATAB&0xffff;
 								 break ;
 						 
 						 case 0x1820a083 :               
-										ModuleCurrent[3]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
+										ModuleCurrent[3]=MessageCAN1.DATAB&0xffff;
 								 break ;
 						 
 						 case 0x1820a084 :               
-										ModuleCurrent[4]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
+										ModuleCurrent[4]=MessageCAN1.DATAB&0xffff;
 								 break ;
 						 
 						 case 0x1820a085 :               
-										ModuleCurrent[5]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
+										ModuleCurrent[5]=MessageCAN1.DATAB&0xffff;
 								 break ;
 
 						 case 0x1820a086 :               
-										ModuleCurrent[6]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
+										ModuleCurrent[6]=MessageCAN1.DATAB&0xffff;
 								 break ;
 						 
 						 case 0x1820a087 :               
-										ModuleCurrent[7]=(MessageCAN1.DATAB&0xff)+(MessageCAN1.DATAB&0xff00);
+										ModuleCurrent[7]=MessageCAN1.DATAB&0xffff;
 								 break ;
 
 //        英飞源协议 
@@ -397,7 +399,29 @@ void ModuleSet(uint8_t CMD, uint16_t V, uint16_t I,uint8_t ModuleType)
 									 CAN_Data[7]=0x07;		 
 									 WriteCAN1(8,1, CANID,CAN_Data);	
 										break;
+									 
 								 case 3:	 
+									 CANID=0x180180a0|(i<<8);                      //软起开机
+										if(V>5000)
+									 {
+										 CAN_Data[0]=0x11;
+									 }
+									 else
+									 {
+										 CAN_Data[0]=0x03;
+									 }	
+									 CAN_Data[0]=0x01;
+									 CAN_Data[1]=0x00;
+									 CAN_Data[2]=V&0xff;
+									 CAN_Data[3]=(V>>8)&0xff;
+									 CAN_Data[4]=I&0xff;
+									 CAN_Data[5]=(I>>8)&0xff;
+									 CAN_Data[6]=0x6c;
+									 CAN_Data[7]=0x07;		 
+									 WriteCAN1(8,1, CANID,CAN_Data);	
+										break;									 
+						 
+								 case 4:	 
 									 CANID=0x180180a0|(i<<8) ;                     //关机
 									 CAN_Data[0]=0x02;
 									 CAN_Data[1]=0x00;
@@ -408,7 +432,7 @@ void ModuleSet(uint8_t CMD, uint16_t V, uint16_t I,uint8_t ModuleType)
 									 CAN_Data[6]=0x00;
 									 CAN_Data[7]=0x00;					 
 									 WriteCAN1(8,1, CANID,CAN_Data);	
-								 case 4:	 
+								 case 5:	 
 									 CANID=0x184080a0|(i<<8) ;                     //心跳
 									 CAN_Data[0]=0x00;
 									 CAN_Data[1]=0x00;
@@ -446,8 +470,7 @@ void ModuleSet(uint8_t CMD, uint16_t V, uint16_t I,uint8_t ModuleType)
 										break;
 									 
 								 case 2:	 
-									 CANID=0x02DA00F0|(i<<8);                      //快速开机
-								 
+									 CANID=0x02DA00F0|(i<<8);                      //快速开机								 
 									 CAN_Data[0]=0x00;
 									 CAN_Data[1]=0x00;
 									 CAN_Data[2]=0x00;
@@ -458,7 +481,10 @@ void ModuleSet(uint8_t CMD, uint16_t V, uint16_t I,uint8_t ModuleType)
 									 CAN_Data[7]=0x00;		 
 									 WriteCAN1(8,1, CANID,CAN_Data);	
 										break;
-								 case 3:	 
+								 
+								 case 3:
+									  break;
+								 case 4:	 
 									 CANID=0x02DA00F0|(i<<8);                     //关机
 									 CAN_Data[0]=0x01;
 									 CAN_Data[1]=0x00;

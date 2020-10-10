@@ -7,7 +7,7 @@
 #include <gpio.h>
 #include <bms.h>
 
-extern uint16_t ScnTime;
+extern uint32_t ScnTime;
 extern uint16_t InsulationTime;
 extern uint32_t ChargedTime;
 

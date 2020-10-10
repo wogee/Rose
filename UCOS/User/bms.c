@@ -237,8 +237,8 @@ unsigned char BatterMessage[49];         //电池参数数据包
 unsigned char CFGMessage[13];            //配置参数数据包 
 unsigned char BCSMessage[9];             //充电测量数据包
 
-uint8_t InsulationFlag  ;
-uint8_t OutVoltageDetFlag;
+uint8_t InsulationFlag  ;   //  1，开始做绝缘检测  2，绝缘检测完成 3，绝缘检测的整个流程走完。
+uint8_t OutVoltageDetFlag;  //  1，开始检测电池电压  2，电池电压检测通过   3，电池电压检测不通过
 
 BMSMsg BMSMessage;
 ChargeMsg ChargerMsg;
@@ -701,18 +701,7 @@ void BHM_Analyse(void)
 		   if(PRINT_STRING)
 	     Print("%s\n", "chargestate 1 ,  handshake !"); 
        BMSMessage.MAXVoltage= MessageCAN0.DATAA&0xffff;			 //电压做绝缘检测使用
-			 if(BMSMessage.MAXVoltage<=ChargerMsg.MAXVoltage)      //界定绝缘检测电压
-			 {
-				  ChargerMsg.InsuVoltage=BMSMessage.MAXVoltage;
-				  if(ChargerMsg.InsuVoltage<=2000)
-						ChargerMsg.InsuVoltage=2000;						
-			 }
-			 else
-			 {
-			    ChargerMsg.InsuVoltage=ChargerMsg.MAXVoltage;			 
-			 }
-				  ChargerMsg.InsuCurrent=10;                      //界定绝缘检测电流
-			 
+			 			 
 			 /**  充电桩检测K1，K2外侧电压小于10V，正常了就进行绝缘检测 **/
 			 		if(InsulationFlag==3)
 					{
