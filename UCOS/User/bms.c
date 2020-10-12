@@ -456,6 +456,7 @@ void BMSMain (void)
 			      ChargerMsg.CCScnt++;                                                      
 		        ChargerMsg.BCLcnt++; 	
             ChargerMsg.BCScnt++; 		
+
 		      if((BMSMessage.BCL1flag==0)||(BMSMessage.BCS1flag==0))                          //首次的BCL1和BCS1只要一个接收到，则进入
 		      {
 						if((ChargerMsg.CROcnt%250)==0)                                                //电池充电总状态，250ms发送一次  
@@ -481,16 +482,22 @@ void BMSMain (void)
 		      }					
 					else if((BMSMessage.BCL1flag==1)&&(BMSMessage.BCS1flag==1))
 		      {
-						if(ChargerMsg.BCLcnt>1000)                                                  // DN.3006 DN.3008 接收到BCL中断
-						{
-							 BMS_CEM(0xfcf4c0fc); 
-							 ChargerMsg.ChargeStage = 9;
-						}						
-						if(ChargerMsg.BCScnt>5*1000)                                                // DN.3005 DN.3007 接收到BCS中断
-						{															
-							 BMS_CEM(0xfcf4c0fc); 	
-               ChargerMsg.ChargeStage = 9;							
-						}												
+						 if((BMSMessage.ChargeSuspendTime<(10*60))&&(BMSMessage.BatteryChgAlow	=0x10))   //充电暂停10分钟 可恢复
+						 {
+									if(ChargerMsg.BCLcnt>1000)                                                  // DN.3006 DN.3008 接收到BCL中断
+									{
+										 BMS_CEM(0xfcf4c0fc); 
+										 ChargerMsg.ChargeStage = 9;
+									}						
+									if(ChargerMsg.BCScnt>5*1000)                                                // DN.3005 DN.3007 接收到BCS中断
+									{															
+										 BMS_CEM(0xfcf4c0fc); 	
+										 ChargerMsg.ChargeStage = 9;							
+									}
+							}else if((BMSMessage.ChargeSuspendTime>(10*60))&&(BMSMessage.BatteryChgAlow	=0x00))//充电暂停超过10分钟，不可恢复
+						 {
+							 ChargerMsg.ChargeStage=8;
+						 }					 
 					}										
 	       break;					
 		case 8:                                                                          
@@ -897,16 +904,13 @@ void BSM_Analyse(void)
 					      ChargerMsg.StopReason=0xf0f40010;	
 						    ChargerMsg.ChargeStage=8;	
 					 }					 
-			    BMSMessage.BatteryChgAlow   = (MessageCAN0.DATAB>>16)&0x30;	
+			    BMSMessage.BatteryChgAlow   = (MessageCAN0.DATAB>>16)&0x30;	                                  //充电允许
 					 if ((BMSMessage.BatteryChgAlow	== 0x10)&&(ChargerMsg.DCSwitchFlag==1))                       //充电允许，正在充电的情况下  时间清零  否则时间继续累加
 					 {
-             BMSMessage.ChargeSuspendTime=0;
+                 BMSMessage.ChargeSuspendTime=0;
 					 }        
-           if ((BMSMessage.BatteryChgAlow == 0x00)&&(ChargerMsg.DCSwitchFlag==1))                       //todo 充电禁止  正常无错误时10分钟内允许可恢复，超过10分钟则不允许回复
+           if ((BMSMessage.BatteryChgAlow == 0x00)&&(ChargerMsg.DCSwitchFlag==1))                       //充电禁止  正常无错误时10分钟内允许可恢复，超过10分钟则不允许回复
            {
-					       DC_SWITCH_OFF();                                                                       //未检测电流的情况下直接断开
-					       ChargerMsg.DCSwitchFlag=0;
-						     BMSMessage.ChargeSuspendTime=0;
 						     ChargerMsg.PreCharge=0;
 					 }						 			 			 
 		 }
