@@ -32,4 +32,5 @@
 .\flash\os_core.o: .\User\bms.h
 .\flash\os_core.o: ..\Common\BoardSupport\bsp.h
 .\flash\os_core.o: ..\Common\BoardSupport\phylan_ks8721b.h
+.\flash\os_core.o: .\BSP\eeprom.h
 .\flash\os_core.o: .\User\insulation.h

@@ -19,7 +19,7 @@
 #define AC_SWITCH_ON()   	LPC_GPIO3->DIR |= AC_SWITCH; LPC_GPIO3->SET |= AC_SWITCH     				 
 #define AC_SWITCH_OFF()   LPC_GPIO3->DIR |= AC_SWITCH; LPC_GPIO3->CLR |= AC_SWITCH
 
-#define DC_SWITCH        	(1ul << 18)                             	 			                     
+#define DC_SWITCH        	(1ul << 19)                             	 			                     
 #define DC_SWITCH_ON()   	LPC_GPIO1->DIR |= DC_SWITCH; LPC_GPIO1->SET |= DC_SWITCH     				 
 #define DC_SWITCH_OFF()   LPC_GPIO1->DIR |= DC_SWITCH; LPC_GPIO1->CLR |= DC_SWITCH
 

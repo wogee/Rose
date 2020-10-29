@@ -32,4 +32,5 @@
 .\flash\os_mutex.o: .\User\bms.h
 .\flash\os_mutex.o: ..\Common\BoardSupport\bsp.h
 .\flash\os_mutex.o: ..\Common\BoardSupport\phylan_ks8721b.h
+.\flash\os_mutex.o: .\BSP\eeprom.h
 .\flash\os_mutex.o: .\User\insulation.h

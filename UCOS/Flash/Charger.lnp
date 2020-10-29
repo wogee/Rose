@@ -12,6 +12,7 @@
 ".\flash\rtc.o"
 ".\flash\timer.o"
 ".\flash\wdt.o"
+".\flash\eeprom.o"
 ".\flash\lpc177x_8x_clkpwr.o"
 ".\flash\lpc177x_8x_systick.o"
 ".\flash\lpc177x_8x_gpio.o"

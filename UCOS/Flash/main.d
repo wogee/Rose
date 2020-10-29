@@ -32,6 +32,7 @@
 .\flash\main.o: .\User\bms.h
 .\flash\main.o: ..\Common\BoardSupport\bsp.h
 .\flash\main.o: ..\Common\BoardSupport\phylan_ks8721b.h
+.\flash\main.o: .\BSP\eeprom.h
 .\flash\main.o: .\User\insulation.h
 .\flash\main.o: .\User\cortexm3.h
 .\flash\main.o: .\User\module.h

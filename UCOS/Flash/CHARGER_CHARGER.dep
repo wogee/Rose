@@ -1,6 +1,6 @@
 Dependencies for Project 'CHARGER', Target 'CHARGER': (DO NOT MODIFY !)
-F (.\User\main.c)(0x5F687A4F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\main.o --omf_browse .\flash\main.crf --depend .\flash\main.d)
-I (.\User\includes.h)(0x5D85B574)
+F (.\User\main.c)(0x5F8416C7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\main.o --omf_browse .\flash\main.crf --depend .\flash\main.d)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -18,7 +18,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -26,15 +26,16 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 I (.\User\cortexm3.h)(0x5C44A3A0)
 I (.\User\module.h)(0x5F61B840)
-F (.\User\bms.c)(0x5F83C1D4)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\bms.o --omf_browse .\flash\bms.crf --depend .\flash\bms.d)
+F (.\User\bms.c)(0x5F9A7696)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\bms.o --omf_browse .\flash\bms.crf --depend .\flash\bms.d)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
@@ -48,17 +49,17 @@ I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 I (.\User\main.h)(0x5F4CC9C3)
 I (.\BSP\can.h)(0x5DD4D93C)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (.\User\insulation.h)(0x5DA06C6C)
 I (.\BSP\adc.h)(0x5E8D7C0E)
-F (.\User\module.c)(0x5F83BDEC)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\module.o --omf_browse .\flash\module.crf --depend .\flash\module.d)
+F (.\User\module.c)(0x5F9A7DEC)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\module.o --omf_browse .\flash\module.crf --depend .\flash\module.d)
 I (.\User\module.h)(0x5F61B840)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
@@ -73,17 +74,17 @@ I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\User\main.h)(0x5F4CC9C3)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (.\User\insulation.h)(0x5DA06C6C)
 I (.\BSP\adc.h)(0x5E8D7C0E)
-F (.\User\insulation.c)(0x5F815383)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\insulation.o --omf_browse .\flash\insulation.crf --depend .\flash\insulation.d)
+F (.\User\insulation.c)(0x5F9A70FF)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\insulation.o --omf_browse .\flash\insulation.crf --depend .\flash\insulation.d)
 I (.\User\insulation.h)(0x5DA06C6C)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
@@ -97,17 +98,17 @@ I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\User\main.h)(0x5F4CC9C3)
 I (.\BSP\can.h)(0x5DD4D93C)
 I (.\Code\print.h)(0x5C44A3A0)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 F (.\User\fram.c)(0x5EF070B6)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\fram.o --omf_browse .\flash\fram.crf --depend .\flash\fram.d)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
 I (D:\software\MDK\ARM\ARMCC\include\stdint.h)(0x57F606B8)
@@ -119,12 +120,12 @@ I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
 I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 I (.\BSP\ssp.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 F (.\BSP\gpio.c)(0x5F4C587C)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\gpio.o --omf_browse .\flash\gpio.crf --depend .\flash\gpio.d)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
 I (D:\software\MDK\ARM\ARMCC\include\stdint.h)(0x57F606B8)
@@ -155,7 +156,7 @@ I (..\Common\Drivers\include\lpc_types.h)(0x5C44A3A0)
 I (.\Ports\os_cpu.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 F (.\BSP\can.c)(0x5EFD8210)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\can.o --omf_browse .\flash\can.crf --depend .\flash\can.d)
@@ -173,12 +174,12 @@ I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 I (.\User\main.h)(0x5F4CC9C3)
 I (.\BSP\can.h)(0x5DD4D93C)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 F (.\BSP\ssp.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\ssp.o --omf_browse .\flash\ssp.crf --depend .\flash\ssp.d)
@@ -202,7 +203,7 @@ I (..\Common\Drivers\include\lpc_types.h)(0x5C44A3A0)
 I (.\Ports\os_cpu.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
 I (.\User\main.h)(0x5F4CC9C3)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
@@ -211,7 +212,7 @@ I (.\Code\print.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 F (.\BSP\timer.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\timer.o --omf_browse .\flash\timer.crf --depend .\flash\timer.d)
 I (.\BSP\timer.h)(0x5C44A3A0)
@@ -223,7 +224,7 @@ I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc_types.h)(0x5C44A3A0)
 I (.\Ports\os_cpu.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 F (.\BSP\wdt.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\wdt.o --omf_browse .\flash\wdt.crf --depend .\flash\wdt.d)
 I (.\BSP\wdt.h)(0x5C44A3A0)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
@@ -233,6 +234,14 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc_types.h)(0x5C44A3A0)
 I (.\Ports\os_cpu.h)(0x5C44A3A0)
+F (.\BSP\eeprom.c)(0x5F83F889)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\eeprom.o --omf_browse .\flash\eeprom.crf --depend .\flash\eeprom.d)
+I (.\CMSIS_M3\LPC177x_8x.H)(0x5C44A3A0)
+I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
+I (D:\software\MDK\ARM\ARMCC\include\stdint.h)(0x57F606B8)
+I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
+I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
+I (BSP\eeprom.h)(0x5F83F3D0)
+I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
 F (..\Common\Drivers\source\lpc177x_8x_clkpwr.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\lpc177x_8x_clkpwr.o --omf_browse .\flash\lpc177x_8x_clkpwr.crf --depend .\flash\lpc177x_8x_clkpwr.d)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
@@ -286,7 +295,7 @@ I (..\Common\Drivers\include\lpc_types.h)(0x5C44A3A0)
 I (.\Ports\os_cpu.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 F (.\CMSIS_M3\startup_LPC177x_8x.s)(0x5F6C6EC7)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include--pd "__UVISION_VERSION SETA 523" --pd "_RTE_ SETA 1" --pd "LPC177x_8x SETA 1"--list .\startup_lpc177x_8x.lst --xref -o .\flash\startup_lpc177x_8x.o --depend .\flash\startup_lpc177x_8x.d)
@@ -302,7 +311,7 @@ I (CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
 F (.\Ports\os_cpu.h)(0x5C44A3A0)()
 F (.\Ports\os_cpu_a.asm)(0x5F6C6ED5)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include--pd "__UVISION_VERSION SETA 523" --pd "_RTE_ SETA 1" --pd "LPC177x_8x SETA 1"--list .\os_cpu_a.lst --xref -o .\flash\os_cpu_a.o --depend .\flash\os_cpu_a.d)
 F (.\Ports\os_cpu_c.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_cpu_c.o --omf_browse .\flash\os_cpu_c.crf --depend .\flash\os_cpu_c.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -320,7 +329,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -328,14 +337,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_core.c)(0x5F6DA791)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_core.o --omf_browse .\flash\os_core.crf --depend .\flash\os_core.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -353,7 +363,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -361,14 +371,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_flag.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_flag.o --omf_browse .\flash\os_flag.crf --depend .\flash\os_flag.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -386,7 +397,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -394,14 +405,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_mbox.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_mbox.o --omf_browse .\flash\os_mbox.crf --depend .\flash\os_mbox.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -419,7 +431,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -427,14 +439,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_mem.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_mem.o --omf_browse .\flash\os_mem.crf --depend .\flash\os_mem.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -452,7 +465,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -460,14 +473,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_mutex.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_mutex.o --omf_browse .\flash\os_mutex.crf --depend .\flash\os_mutex.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -485,7 +499,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -493,14 +507,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_q.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_q.o --omf_browse .\flash\os_q.crf --depend .\flash\os_q.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -518,7 +533,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -526,14 +541,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_sem.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_sem.o --omf_browse .\flash\os_sem.crf --depend .\flash\os_sem.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -551,7 +567,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -559,14 +575,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_time.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_time.o --omf_browse .\flash\os_time.crf --depend .\flash\os_time.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -584,7 +601,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -592,17 +609,18 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\ucos_ii.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\ucos_ii.o --omf_browse .\flash\ucos_ii.crf --depend .\flash\ucos_ii.d)
 F (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)()
 F (.\uCOS-II\os_cfg.h)(0x5DA96B32)()
 F (.\uCOS-II\os_dbg_r.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_dbg_r.o --omf_browse .\flash\os_dbg_r.crf --depend .\flash\os_dbg_r.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -620,7 +638,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -628,14 +646,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_tmr.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_tmr.o --omf_browse .\flash\os_tmr.crf --depend .\flash\os_tmr.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -653,7 +672,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -661,14 +680,15 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 F (.\uCOS-II\os_task.c)(0x5C44A3A0)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\os_task.o --omf_browse .\flash\os_task.crf --depend .\flash\os_task.d)
-I (.\User\includes.h)(0x5D85B574)
+I (.\User\includes.h)(0x5F83F40A)
 I (D:\software\MDK\ARM\ARMCC\include\stdio.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (D:\software\MDK\ARM\ARMCC\include\ctype.h)(0x57F606B6)
@@ -686,7 +706,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc177x_8x_clkpwr.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\BSP\gpio.h)(0x5F4C5835)
+I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\BSP\adc.h)(0x5E8D7C0E)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
@@ -694,9 +714,10 @@ I (.\BSP\can.h)(0x5DD4D93C)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\fram.h)(0x5E16CF9C)
+I (.\User\fram.h)(0x5F83F55D)
 I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (..\Common\BoardSupport\bsp.h)(0x5C44A3A0)
 I (..\Common\BoardSupport\phylan_ks8721b.h)(0x5C44A3A0)
+I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)

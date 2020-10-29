@@ -17,9 +17,14 @@
 #define  CMD_FRAM_RD_MEMORY				0x03     //读存储器数据
 #define  CMD_FRAM_WR_MEMORY				0x02     //写存储器数据
 
-#define 	SYS_PARA_ADDR 	  	  0x0000 		 //系统参数存储地址
+#define 	SYS_PARA_ADDR 	  	  0 		     //系统参数存储地址   fram  地址0    eeprom 0页
 
 extern void	FramRead(uint8_t *dataptr,uint16_t addr,uint16_t length);
 extern void FramWrite(uint8_t *dataptr,uint16_t addr,uint16_t length);
+
+
+
+
+
 
 #endif

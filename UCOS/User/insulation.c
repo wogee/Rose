@@ -29,11 +29,12 @@ static void GetInsulationResistor(void);
 
 void InsulationMain (void)
 {   	
+  uint8_t i=0;
 	
   while (1) 
  {	 
-	   uint8_t i=0;
-	  OSTimeDlyHMSM(0,0,0,500);	
+
+	  OSTimeDlyHMSM(0,0,0,200);	
 	 
 //绝缘检测
 	 if(InsulationFlag==1)
@@ -64,7 +65,7 @@ void InsulationMain (void)
 //检测外部电压大于10V	 
 	 if(OutVoltageDetFlag==1)
 	   {
-	        InsulationSendFrame(INS_ADDR,INS_READ,0x02030405);     //读取绝缘检测数据
+	        InsulationSendFrame(INS_ADDR,INS_READ,0x02030405);     //读取电压检测数据
 					 do
 					{		
 						 i++;				
@@ -82,11 +83,11 @@ void InsulationMain (void)
 //							OutVoltageDetFlag=3;
 						}while(i<3);	
 //强制赋值，使检测外部电压通过					
-					if(i>=3)
-					{
-						 i=0;	
+//					if(i>=3)
+//					{
+//						 i=0;	
 						 OutVoltageDetFlag=2;	
-					}						
+//					}						
 	    }	  			 
    }
 }

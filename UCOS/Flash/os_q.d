@@ -32,4 +32,5 @@
 .\flash\os_q.o: .\User\bms.h
 .\flash\os_q.o: ..\Common\BoardSupport\bsp.h
 .\flash\os_q.o: ..\Common\BoardSupport\phylan_ks8721b.h
+.\flash\os_q.o: .\BSP\eeprom.h
 .\flash\os_q.o: .\User\insulation.h

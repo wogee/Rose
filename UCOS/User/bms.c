@@ -832,15 +832,15 @@ void DataPackCEB_Analyse(void)
 
 void BRO_Analyse(void)	
 {	
-	   if(ChargerMsg.ChargeStage==5)
+	   if((ChargerMsg.ChargeStage==5)||(ChargerMsg.ChargeStage==6))
 		 {
+			  ChargerMsg.ChargeStage=6 ;
 			 if((MessageCAN0.DATAA&0xff)==0xaa)
 			 {
 				 BMSMessage.BROflag=2;
 			 }else{
 				  BMSMessage.BROflag=1;
-			 }				 
-				 ChargerMsg.ChargeStage=6 ;			 
+			 }				 			 
 	   } 
 }
 

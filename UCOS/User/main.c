@@ -53,12 +53,13 @@ int main (void)
 	  SSP0_Init();
 	  SSP2_Init();
 	  Timer0Init();
+	  EepromInit();
 	  UART0Init();
 	  UART1Init(); 
 	  UART2Init();
 	  UART3Init();	
     UART4Init();
-	
+	 
 	  CAN_Init(0, BPS_250K);
 	  CAN_Init(1, BPS_125K);
 	
@@ -164,8 +165,7 @@ static  void  taskInsulation(void  *parg)
 	(void)parg;
 	 if(PRINT_STRING)
 	 Print("%s\n", "InsulationMain Task Action !");
-	 InsulationMain();
-	 
+	 InsulationMain();	 
 }
 
 /*********************************************************************************************************
@@ -178,7 +178,8 @@ static  void  taskInsulation(void  *parg)
 
 static void SystemParameterInit(void)
 {			 	 
-		 FramRead((uint8_t *)&Sys_PARA,SYS_PARA_ADDR,sizeof(Sys_PARA)); 
+		// FramRead((uint8_t *)&Sys_PARA,SYS_PARA_ADDR,sizeof(Sys_PARA)); 
+	   EepromRead(0, SYS_PARA_ADDR, (uint8_t *)&Sys_PARA, MODE_8_BIT, sizeof(Sys_PARA));
 	  if(CHARGERNO_INT_Status()==1)
 		{
 			Sys_PARA.ChargerNO=0;
