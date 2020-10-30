@@ -827,17 +827,17 @@ void DataPackCEB_Analyse(void)
 							 memcpy(BCSMessage+((MessageCAN0.DATAA&0xff)-1)*7,&MessageCAN0.DATAA+1,7);   //当BMS接收到充电机的应答报文CTS后，开始建立连接发送数据DT（数据长度 为49Byte，共分为7包)	
 							 if((MessageCAN0.DATAA&0xff)==BMSMessage.BCSPackCount)   
 							 {							 
-								 BMS_DataAnswerEnd(BMSMessage.BCSdatalen,BMSMessage.BCSPNG);							 
+								 BMS_DataAnswerEnd(BMSMessage.BCSdatalen,BMSMessage.BCSPNG);	
+							   BMSMessage.BCSflag=0;								 
 							 }
-							 BMSMessage.BCSflag=0;
 					    }
-            else if(BMSMessage.BCSdataflag>=1)
+            if(BMSMessage.BCSdataflag>=1)
 						{
 						   	if((MessageCAN0.DATAA&0xff)==BMSMessage.BCSPackCount)   
 							 {							 
-								 BMS_DataAnswerEnd(BMSMessage.BCSdatalen,BMSMessage.BCSPNG);							 
-							 }	
-                BMSMessage.BCSdataflag=0;							 
+								 BMS_DataAnswerEnd(BMSMessage.BCSdatalen,BMSMessage.BCSPNG);	
+                 BMSMessage.BCSdataflag=0;								 
+							 }								 
 						}							
 							 break;
 				default:
