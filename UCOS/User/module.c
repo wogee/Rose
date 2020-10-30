@@ -47,7 +47,7 @@ void ModuleMain (void)
 	
   while (1) 
  {	 
-	  OSTimeDlyHMSM(0,0,0,10);
+	  OSTimeDlyHMSM(0,0,0,20);
 	  ModuleMsg.Cnt++;
 	  MonitorMsg.Cnt++;
 		Module_RECData_Pro();
@@ -105,7 +105,7 @@ void ModuleMain (void)
 											  InsulationFlag=3;
 										 }							 
 		   }		
-		 if((ChargerMsg.ChargeStage==7)&&(BMSMessage.BatteryChgAlow	== 0x10))                       // 充电状态
+		 if(ChargerMsg.ChargeStage==7)                       // 充电状态
 		  {
 				if(BMSMessage.BatteryChgAlow	== 0x10)                                                  //充电允许
 				{
@@ -133,28 +133,28 @@ void ModuleMain (void)
 											ChargerMsg.DCSwitchFlag=1;
 											ChargerMsg.PreCharge=1;	                                     // 预充标识										 
 								 }
-						}
+					   	}
 					 else{                                    //模块下发指令，自动功率切换流程
-									if(PowerDividerFlag==0)//非切换
-									{
+//									if(PowerDividerFlag==0)//非切换
+//									{
 											 ModuleSet(1, BMSMessage.RequestVoltage, BMSMessage.RequestCurrent*10/ModuleMsg.NOcount,ModuleMsg.ModuleType);         //正常充电
-											if(BMSMessage.RequestVoltage*BMSMessage.RequestCurrent*10>=BMSMessage.RequestVoltage*ModuleMsg.MAXCurrent*10*ModuleMsg.NOcount)
-											{
-													ChargerDivider50(BMSMessage.RequestVoltage,BMSMessage.RequestCurrent);				                                     //发送功率分配申请			
-											}
-									}
-									else if(PowerDividerFlag==1)
-									{//切换																		
-											 ModuleSet(1, BMSMessage.RequestVoltage, BMSMessage.RequestCurrent*10/ModuleMsg.NOcount/2,ModuleMsg.ModuleType);        //正常电流减半																
-									 }						
-				      }
+//											if(BMSMessage.RequestVoltage*BMSMessage.RequestCurrent*10>=BMSMessage.RequestVoltage*ModuleMsg.MAXCurrent*10*ModuleMsg.NOcount)
+//											{
+//													ChargerDivider50(BMSMessage.RequestVoltage,BMSMessage.RequestCurrent);				                                     //发送功率分配申请			
+//											}
+//									}
+//									else if(PowerDividerFlag==1)
+//									{//切换																		
+//											 ModuleSet(1, BMSMessage.RequestVoltage, BMSMessage.RequestCurrent*10/ModuleMsg.NOcount/2,ModuleMsg.ModuleType);        //正常电流减半																
+//									 }						
+				         }
 						}
           else if(BMSMessage.BatteryChgAlow	== 0x00)                                               //充电禁止
 					{		
              ModuleSet(4, 0, 0,0);
 						 if((ChargerMsg.DCSwitchFlag==1)&&(ChargerMsg.ChargeCurrent<=50))                      //停掉电流，断开接触器                                            
 							{						
-								LOCK_SWITCH_OFF();
+								DC_SWITCH_OFF();
 								ChargerMsg.DCSwitchFlag=0;				
 							 }						
 					}					 

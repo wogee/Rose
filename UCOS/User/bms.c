@@ -513,7 +513,8 @@ void BMSMain (void)
 						{
 							 BMS_CEM(0xfcf4c0fc); 	
 							if(ChargerMsg.DCSwitchFlag==1)
-								{						
+								{	
+									DC_SWITCH_OFF();
 									LOCK_SWITCH_OFF();
 									ChargerMsg.DCSwitchFlag=0;
 									ChargerMsg.ChargeStage = 9;								
@@ -524,7 +525,7 @@ void BMSMain (void)
 				 {
 					 	if((ChargerMsg.DCSwitchFlag==1)&&(ChargerMsg.ChargeCurrent<=50))                                      
 						{						
-							LOCK_SWITCH_OFF();
+							DC_SWITCH_OFF();
 							ChargerMsg.DCSwitchFlag=0;
 							ChargerMsg.ChargeStage=9;					
 						 }
@@ -720,58 +721,72 @@ void BHM_Analyse(void)
 }		
 
 void DataPackCEC_Analyse(void)	
-{				
-		 if((ChargerMsg.ChargeStage==3)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x200))
-		 {	    
-						BMSMessage.BRMflag= 1 ; 
-						BMSMessage.BRMdatalen=(MessageCAN0.DATAA>>8)&0xff;
-						BMSMessage.BRMPackCount=MessageCAN0.DATAA>>24;
-						BMSMessage.BRMPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-						BMS_DataAnswerHead(BMSMessage.BRMPackCount,BMSMessage.BRMPNG);								 
-			}							
-			else if((ChargerMsg.ChargeStage==4)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x600))
-			{
-						BMSMessage.BCPflag=1;									
-						BMSMessage.CFGdatalen=(MessageCAN0.DATAA>>8)&0xff;
-						BMSMessage.CFGPackCount=MessageCAN0.DATAA>>24;
-						BMSMessage.CFGPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-						BMS_DataAnswerHead(BMSMessage.CFGPackCount,BMSMessage.CFGPNG);
-			}
-			else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1100))
-			{
-						ChargerMsg.StartCompleteflag=1;									
-						BMSMessage.BCSflag=1;
-						BMSMessage.BCS1flag=1;
-						ChargerMsg.BCScnt = 0;
-						BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
-						BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
-						BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-						BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
-			}			
-			else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1500))
-			{					
-						BMSMessage.BCSdataflag=1;									
-						BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
-						BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
-						BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-						BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
-			}
-			else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1600))
-			{	
-						BMSMessage.BCSdataflag=2;
-						BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
-						BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
-						BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-						BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
-			}
-			else if((ChargerMsg.ChargeStage==7)&&((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1700))
-			{	
-						BMSMessage.BCSdataflag=3;
-						BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
-						BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
-						BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
-						BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
-			}				 
+{		
+     	switch (ChargerMsg.ChargeStage)
+			{ 	
+					case 3:	
+							if(((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x200))
+							 {						
+									BMSMessage.BRMflag= 1 ; 
+									BMSMessage.BRMdatalen=(MessageCAN0.DATAA>>8)&0xff;
+									BMSMessage.BRMPackCount=MessageCAN0.DATAA>>24;
+									BMSMessage.BRMPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+									BMS_DataAnswerHead(BMSMessage.BRMPackCount,BMSMessage.BRMPNG);
+								 break;
+							 }
+					case 4:	
+							 if(((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x600))
+								{
+									BMSMessage.BCPflag=1;									
+									BMSMessage.CFGdatalen=(MessageCAN0.DATAA>>8)&0xff;
+									BMSMessage.CFGPackCount=MessageCAN0.DATAA>>24;
+									BMSMessage.CFGPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+									BMS_DataAnswerHead(BMSMessage.CFGPackCount,BMSMessage.CFGPNG);
+								}					
+								 break;
+					
+					case 6:					
+					case 7:	
+								if(((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1100))
+								{
+										ChargerMsg.StartCompleteflag=1;									
+										BMSMessage.BCSflag=1;
+										BMSMessage.BCS1flag=1;
+										ChargerMsg.BCScnt = 0;
+										BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
+										BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
+										BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+										BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
+								}
+								else if(((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1500))
+								{					
+											BMSMessage.BCSdataflag=1;									
+											BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
+											BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
+											BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+											BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
+								}
+								else if(((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1600))
+								{	
+											BMSMessage.BCSdataflag=2;
+											BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
+											BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
+											BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+											BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
+								}
+								else if(((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1700))
+								{	
+											BMSMessage.BCSdataflag=3;
+											BMSMessage.BCSdatalen=(MessageCAN0.DATAA>>8)&0xff;
+											BMSMessage.BCSPackCount=MessageCAN0.DATAA>>24;
+											BMSMessage.BCSPNG=((MessageCAN0.DATAB)&0xff0000)>>8;								 
+											BMS_DataAnswerHead(BMSMessage.BCSPackCount,BMSMessage.BCSPNG);
+								}				
+					   break;
+								
+					default:
+					     break;									
+		}			
 }		
 
 void DataPackCEB_Analyse(void)	
@@ -805,6 +820,7 @@ void DataPackCEB_Analyse(void)
 						   ChargerMsg.ChargeStage = 5;							 
 						 }
 						 break;
+			  case 6:                                                                            //多个case走同样的语句
 				case 7:
 					  if(BMSMessage.BCSflag==1)
 							{
