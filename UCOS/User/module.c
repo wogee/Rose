@@ -273,12 +273,12 @@ static void	Module_RECData_Pro(void)
 	                             监控端的数据处理
 **************************************************************************************************/		
 //A枪监控数据处理
-		 case 0x184600a0:   
+		 case 0x183500a0:                //遥测帧 
 			 if(Sys_PARA.ChargerNO==0){
         if((MessageCAN1.DATAA&0xff)==0x05)
 		    {			
-         AnalyseMT34();           
-			   AnalyseMT35();		
+					 AnalyseMT34();           
+					 AnalyseMT35();		
 		     }
 			 }
 		     break ;
@@ -307,7 +307,7 @@ static void	Module_RECData_Pro(void)
 			 
 					 
 //B枪监控数据处理					 
-		 case 0x184601a0: 			  
+		 case 0x183501a0: 			  
 			 if(Sys_PARA.ChargerNO==1){		 
         if((MessageCAN1.DATAA&0xff)==0x05)
 		    {			

@@ -319,7 +319,17 @@ void BMSMain (void)
 	 {
 	   ChargerMsg.ChargeStage=0;
 	 	 //未插枪，做插枪提示
+	 }
+	                                                                                      //急停处理
+   if(STOP_INT_Status()==1)
+	 {
+		 
 	 }		 
+   if(STOP_INT_Status()==1)                                                             //门禁处理
+	 {
+		 
+	 }
+ 
 		BMS_RECData_Pro();                                                                 // 处理充电桩过来的数据 ，主要是被动处理函数 	 	 
 	switch (ChargerMsg.ChargeStage)
 	{
