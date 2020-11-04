@@ -23,7 +23,17 @@ static void AnalyseMT32(void);
 static void AnalyseMT33(void);
 static void AnalyseMT34(void);
 static void AnalyseMT35(void);
-static void AnalyseMT46(void);
+static void AnalyseMT36(void);
+static void AnalyseMT37(void);
+
+static void InitiateMT30(void);
+static void InitiateMT31(void);
+static void InitiateMT32(void);
+static void InitiateMT33(void);
+static void InitiateMT34(void);
+static void InitiateMT35(void);
+static void InitiateMT36(void);
+static void InitiateMT37(void);
 static void ChargerDivider50(uint32_t Voltage,uint32_t Current);
 
 
@@ -177,6 +187,11 @@ void ModuleMain (void)
 	                             监控端的数据处理
 **************************************************************************************************/
 	
+   if(((MonitorMsg.Cnt)%50)==0)
+	 {
+	   InitiateMT34();	 
+	 }
+
 	 if(ChargerMsg.StartCompleteflag==1)
 		 {
 		   AnalyseMT33();
@@ -596,9 +611,46 @@ void ModuleGet(uint8_t CMD,uint32_t Voltage,uint32_t Current,uint8_t err)
 **************************************************************************************************************/
 void AnalyseMT30(void)
 {	
+	    ChargerMsg.ChargeStage=1;	
+		  InitiateMT30();	
+}
 
+void AnalyseMT31(void)
+{	
+		  InitiateMT31();
+}
+
+void AnalyseMT32(void)
+{	
+	    ChargerMsg.ChargeStage=8;
+	    InitiateMT35();	
+}
+
+void AnalyseMT33(void)
+{	
+		 InitiateMT33();
+}
+
+void AnalyseMT34(void)
+{	
+	
+}
+
+
+void AnalyseMT35(void)
+{	
+	 if((MessageCAN1.DATAA&0xff)==0)
+	 {
 	    ChargerMsg.ChargeStage=1;
-	 if(Sys_PARA.ChargerNO==0){	
+	 }
+	  InitiateMT35();
+	 
+}
+
+
+void InitiateMT30(void)
+{	
+		 if(Sys_PARA.ChargerNO==0){	
 			 CANID=0x1030a000;  
 	  }else{
 			 CANID=0x1030a001; 
@@ -611,10 +663,9 @@ void AnalyseMT30(void)
 			 CAN_Data[5]=0x00;
 			 CAN_Data[6]=0x00;
 			 CAN_Data[7]=0x00;		
-			 WriteCAN1(8,1, CANID,CAN_Data);	
+			 WriteCAN1(8,1, CANID,CAN_Data);
 }
-
-void AnalyseMT31(void)
+void InitiateMT31(void)
 {	
 	 if(Sys_PARA.ChargerNO==0){	
 			 CANID=0x1031a000;  
@@ -690,13 +741,10 @@ void AnalyseMT31(void)
 			 CAN_Data[6]=0x00;	
 			 CAN_Data[7]=0x00;					 
 			 WriteCAN1(8,1, CANID,CAN_Data);
-
 }
-
-void AnalyseMT32(void)
+void InitiateMT32(void)
 {	
-	    ChargerMsg.ChargeStage=8;
-	 if(Sys_PARA.ChargerNO==0){	
+		 if(Sys_PARA.ChargerNO==0){	
 			 CANID=0x1032a000;  
 	  }else{
 			 CANID=0x1032a001; 
@@ -708,12 +756,11 @@ void AnalyseMT32(void)
 			 CAN_Data[4]=0x00;
 			 CAN_Data[5]=0x00;
 			 CAN_Data[6]=0x00;			
-			 WriteCAN1(8,1, CANID,CAN_Data);	
+			 WriteCAN1(8,1, CANID,CAN_Data);
 }
-
-void AnalyseMT33(void)
+void InitiateMT33(void)
 {	
-	 if(Sys_PARA.ChargerNO==0){	
+		 if(Sys_PARA.ChargerNO==0){	
 			 CANID=0x1033a000;  
 	  }else{
 			 CANID=0x1033a001; 
@@ -725,12 +772,11 @@ void AnalyseMT33(void)
 			 CAN_Data[4]=0x00;
 			 CAN_Data[5]=0x00;
 			 CAN_Data[6]=0x00;			
-			 WriteCAN1(8,1, CANID,CAN_Data);	
+			 WriteCAN1(8,1, CANID,CAN_Data);
 }
-
-void AnalyseMT34(void)
+void InitiateMT34(void)
 {	
-	 if(Sys_PARA.ChargerNO==0){	
+		 if(Sys_PARA.ChargerNO==0){	
 			 CANID=0x1834a000;  
 	  }else{
 			 CANID=0x1834a001; 
@@ -748,17 +794,11 @@ void AnalyseMT34(void)
 			 CAN_Data[4]=0x00;
 			 CAN_Data[5]=0x00;
 			 CAN_Data[6]=0x00;			
-			 WriteCAN1(8,1, CANID,CAN_Data);	
+			 WriteCAN1(8,1, CANID,CAN_Data);
 }
-
-
-void AnalyseMT35(void)
+void InitiateMT35(void)
 {	
-	 if((MessageCAN1.DATAA&0xff)==0)
-	 {
-	    ChargerMsg.ChargeStage=1;
-	 }
-	 if(Sys_PARA.ChargerNO==0){	
+		 if(Sys_PARA.ChargerNO==0){	
 			 CANID=0x1035a000;  
 	  }else{
 			 CANID=0x1035a001; 
@@ -801,9 +841,36 @@ void AnalyseMT35(void)
 			 CAN_Data[5]=0x00;
 			 CAN_Data[6]=0x00;			
 	 		 CAN_Data[7]=0x00;				 
-			 WriteCAN1(8,1, CANID,CAN_Data);		  
-	 
+			 WriteCAN1(8,1, CANID,CAN_Data);	
 }
+void InitiateMT36(void)
+{	
+	
+}
+void InitiateMT37(void)
+{	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**************************************************************************************************************

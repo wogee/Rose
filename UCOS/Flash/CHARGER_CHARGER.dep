@@ -35,7 +35,7 @@ I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 I (.\User\cortexm3.h)(0x5C44A3A0)
 I (.\User\module.h)(0x5F61B840)
-F (.\User\bms.c)(0x5F9FCC6F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\bms.o --omf_browse .\flash\bms.crf --depend .\flash\bms.d)
+F (.\User\bms.c)(0x5FA25557)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\bms.o --omf_browse .\flash\bms.crf --depend .\flash\bms.d)
 I (.\User\bms.h)(0x5F71B7CE)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
@@ -59,7 +59,7 @@ I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (.\User\insulation.h)(0x5DA06C6C)
 I (.\BSP\adc.h)(0x5E8D7C0E)
-F (.\User\module.c)(0x5F9F7EE4)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\module.o --omf_browse .\flash\module.crf --depend .\flash\module.d)
+F (.\User\module.c)(0x5FA27BFD)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\module.o --omf_browse .\flash\module.crf --depend .\flash\module.d)
 I (.\User\module.h)(0x5F61B840)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
