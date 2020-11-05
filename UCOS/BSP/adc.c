@@ -25,8 +25,8 @@ uint32_t ADstatus;
 void ADCInit( uint32_t ADC_Clk )
 {
   LPC_SC->PCONP |= (0x1<<12);       /* 使能ADC功率控制器                     */
-  LPC_IOCON->P1_31 &= ~0x9F;
-  LPC_IOCON->P1_31 |= 0x03;         /* ADC IN5                               */
+  LPC_IOCON->P1_30 &= ~0x9F;
+  LPC_IOCON->P1_30 |= 0x03;         /* ADC IN4                               */
 
   LPC_ADC->CR = ( 0x01 << ADC_CHN ) |               /* 选则ADC[5]为ADC输入                   */
                 ((PeripheralClock/ADC_Clk-1)<<8) |  /* CLKDIV = Fpclk / ADC_Clk - 1  */ 

@@ -118,7 +118,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>x?</Name>
+          <Name>d</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -187,6 +187,11 @@
           <count>7</count>
           <WinNumber>1</WinNumber>
           <ItemText>ChargerMsg.DCSwitchFlag</ItemText>
+        </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>ADCSum</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

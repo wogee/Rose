@@ -180,7 +180,7 @@ static void SystemParameterInit(void)
 {			 	 
 		// FramRead((uint8_t *)&Sys_PARA,SYS_PARA_ADDR,sizeof(Sys_PARA)); 
 	   EepromRead(0, SYS_PARA_ADDR, (uint8_t *)&Sys_PARA, MODE_8_BIT, sizeof(Sys_PARA));
-	  if(CHARGERNO_INT_Status()==1)
+	  if(CHARGERNO_INT_Status()==0)
 		{
 			Sys_PARA.ChargerNO=0;
 		}

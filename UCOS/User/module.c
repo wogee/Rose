@@ -288,14 +288,8 @@ static void	Module_RECData_Pro(void)
 	                             监控端的数据处理
 **************************************************************************************************/		
 //A枪监控数据处理
-		 case 0x183500a0:                //遥测帧 
-			 if(Sys_PARA.ChargerNO==0){
-        if((MessageCAN1.DATAA&0xff)==0x05)
-		    {			
-					 AnalyseMT34();           
-					 AnalyseMT35();		
-		     }
-			 }
+		 case 0x183500a0:                //遥测帧 			 
+					 AnalyseMT35();			 
 		     break ;
 		 
 		 case 0x103000a0:                  //充电启动帧
@@ -325,8 +319,7 @@ static void	Module_RECData_Pro(void)
 		 case 0x183501a0: 			  
 			 if(Sys_PARA.ChargerNO==1){		 
         if((MessageCAN1.DATAA&0xff)==0x05)
-		    {			
-         AnalyseMT34();           
+		    {			          
 			   AnalyseMT35();		
 		     }
 			 }
@@ -639,12 +632,18 @@ void AnalyseMT34(void)
 
 void AnalyseMT35(void)
 {	
-	 if((MessageCAN1.DATAA&0xff)==0)
-	 {
-	    ChargerMsg.ChargeStage=1;
+	
+	
+	
+	
+	 if(Sys_PARA.ChargerNO==0)
+	{
+		if((MessageCAN1.DATAA&0xff)==0x05)
+		{			       
+				InitiateMT35();		
+		 }
 	 }
-	  InitiateMT35();
-	 
+	   
 }
 
 
@@ -783,7 +782,7 @@ void InitiateMT34(void)
 		}	  
     if(ADstatus == ADC4V)	
      {
-			 CAN_Data[0]=0x04;
+			 CAN_Data[0]=1<<2;
      }
 		 else{
 			 CAN_Data[0]=0x00;
@@ -799,9 +798,9 @@ void InitiateMT34(void)
 void InitiateMT35(void)
 {	
 		 if(Sys_PARA.ChargerNO==0){	
-			 CANID=0x1035a000;  
+			 CANID=0x1835a000;  
 	  }else{
-			 CANID=0x1035a001; 
+			 CANID=0x1835a001; 
 		}	                      
 			 CAN_Data[0]=0x01;
 			 CAN_Data[1]=0x00;
@@ -845,33 +844,28 @@ void InitiateMT35(void)
 }
 void InitiateMT36(void)
 {	
+			 if(Sys_PARA.ChargerNO==0){	
+			 CANID=0x1835a000;  
+	  }else{
+			 CANID=0x1835a001; 
+		}
+	
+	
+	
+	
 	
 }
 void InitiateMT37(void)
 {	
+			 if(Sys_PARA.ChargerNO==0){	
+			 CANID=0x1835a000;  
+	  }else{
+			 CANID=0x1835a001; 
+		}
+	
+	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**************************************************************************************************************
  充电板的处理函数

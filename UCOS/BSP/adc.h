@@ -14,7 +14,7 @@
 #define ADC_NUM             10
 
 
-#define ADC_CHN				  5		    /*	转换用通道	  */
+#define ADC_CHN				  4		    /*	转换用通道	  */
 #define ADC_TIMES				100	  	/*	采样次数	  */
 
 
