@@ -64,7 +64,9 @@ extern MessageDetail MessageCAN0;                                       /* 引用C
 extern MessageDetail MessageCAN1;                                       /* 引用CAN1通道帧变量           */
 
 extern unsigned int  CANID ;
-extern unsigned char CAN_Data[8]; 
+extern unsigned int  CAN1ID ;
+extern unsigned char CAN_Data[8];
+extern unsigned char CAN1_Data[8];
 /*********************************************************************************************************
 **   定义 CANMOD 寄存器:
 1.This register controls the basic operating mode of the CAN Controller. 

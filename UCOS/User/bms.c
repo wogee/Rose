@@ -759,7 +759,13 @@ void DataPackCEC_Analyse(void)
 					case 7:	
 								if(((MessageCAN0.DATAA&0xff)==0x10)&&((((MessageCAN0.DATAB)&0xff0000)>>8)==0x1100))
 								{
-										ChargerMsg.StartCompleteflag=1;									
+									if(ChargerMsg.StartCompleteflag==2)
+		               {	
+									   ;
+									 }else 
+									 {
+										 ChargerMsg.StartCompleteflag=1;
+									 }										 										 
 										BMSMessage.BCSflag=1;
 										BMSMessage.BCS1flag=1;
 										ChargerMsg.BCScnt = 0;

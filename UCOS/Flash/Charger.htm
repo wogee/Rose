@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Flash\Charger.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Flash\Charger.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Thu Nov 05 16:05:46 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Nov 09 17:12:16 2020
 <BR><P>
 <H3>Maximum Stack Usage =        168 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -18,7 +18,7 @@ Functions with no stack information
  <LI><a href="#[af]">OSCtxSw</a>
  <LI><a href="#[90]">OSIntCtxSw</a>
  <LI><a href="#[8]">OSPendSV</a>
- <LI><a href="#[d8]">intDisAll</a>
+ <LI><a href="#[da]">intDisAll</a>
 </UL>
 </UL>
 <P>
@@ -318,6 +318,10 @@ Global Symbols
 
 <P><STRONG><a name="[d7]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
 
+<P><STRONG><a name="[d8]"></a>__decompress</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
+
+<P><STRONG><a name="[d9]"></a>__decompress1</STRONG> (Thumb, 86 bytes, Stack size unknown bytes, __dczerorl2.o(.text), UNUSED)
+
 <P><STRONG><a name="[7e]"></a>OS_ENTER_CRITICAL</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(UCOSII_ASM))
 <BR><BR>[Called By]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
@@ -379,10 +383,18 @@ Global Symbols
 <P><STRONG><a name="[8]"></a>OSPendSV</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(UCOSII_ASM))
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc177x_8x.o(RESET)
 </UL>
-<P><STRONG><a name="[d8]"></a>intDisAll</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(UCOSII_ASM), UNUSED)
+<P><STRONG><a name="[da]"></a>intDisAll</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(UCOSII_ASM), UNUSED)
 
 <P><STRONG><a name="[c4]"></a>ADCInit</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, adc.o(i.ADCInit))
 <BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[8c]"></a>OSInitHookEnd</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSInitHookEnd))
+<BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
+</UL>
+
+<P><STRONG><a name="[b0]"></a>OSTCBInitHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTCBInitHook))
+<BR><BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
 </UL>
 
 <P><STRONG><a name="[45]"></a>ADCMain</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, adc.o(i.ADCMain))
@@ -395,7 +407,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;taskADC
 </UL>
 
-<P><STRONG><a name="[4c]"></a>ADCRead</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, adc.o(i.ADCRead))
+<P><STRONG><a name="[4a]"></a>ADCRead</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, adc.o(i.ADCRead))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ADCRead
 </UL>
 <BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCScan
@@ -404,18 +416,18 @@ Global Symbols
 <P><STRONG><a name="[47]"></a>ADCScan</STRONG> (Thumb, 144 bytes, Stack size 16 bytes, adc.o(i.ADCScan))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ADCScan &rArr; ADCRead
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Start
-<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetStat
-<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCRead
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Start
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetStat
+<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCRead
 </UL>
 <BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCMain
 </UL>
 
-<P><STRONG><a name="[4b]"></a>ADC_GetStat</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, adc.o(i.ADC_GetStat))
+<P><STRONG><a name="[49]"></a>ADC_GetStat</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, adc.o(i.ADC_GetStat))
 <BR><BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCScan
 </UL>
 
-<P><STRONG><a name="[4a]"></a>ADC_Start</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, adc.o(i.ADC_Start))
+<P><STRONG><a name="[48]"></a>ADC_Start</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, adc.o(i.ADC_Start))
 <BR><BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCScan
 </UL>
 
@@ -539,7 +551,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMS_RECData_Pro
 </UL>
 
-<P><STRONG><a name="[67]"></a>DataPackCEC_Analyse</STRONG> (Thumb, 494 bytes, Stack size 8 bytes, bms.o(i.DataPackCEC_Analyse))
+<P><STRONG><a name="[67]"></a>DataPackCEC_Analyse</STRONG> (Thumb, 506 bytes, Stack size 8 bytes, bms.o(i.DataPackCEC_Analyse))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96 + Unknown Stack Size
 <LI>Call Chain = DataPackCEC_Analyse &rArr; BMS_DataAnswerHead &rArr; WriteCAN0 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
@@ -596,8 +608,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Module_RECData_Pro
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ModuleSet
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT34
-<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT33
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT31
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT31
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT31
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDlyHMSM
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;taskModule
@@ -639,10 +651,6 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[81]"></a>OSInitHookBegin</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSInitHookBegin))
-<BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
-</UL>
-
-<P><STRONG><a name="[8c]"></a>OSInitHookEnd</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSInitHookEnd))
 <BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
 </UL>
 
@@ -734,10 +742,6 @@ Global Symbols
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_ENTER_CRITICAL
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;taskStart
-</UL>
-
-<P><STRONG><a name="[b0]"></a>OSTCBInitHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTCBInitHook))
-<BR><BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
 </UL>
 
 <P><STRONG><a name="[9f]"></a>OSTaskCreate</STRONG> (Thumb, 132 bytes, Stack size 40 bytes, os_task.o(i.OSTaskCreate))
@@ -1218,15 +1222,15 @@ Global Symbols
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT35
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT34
 <LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT33
-<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT31
-<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT30
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT31
+<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT30
 </UL>
 
-<P><STRONG><a name="[d9]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+<P><STRONG><a name="[db]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
 
-<P><STRONG><a name="[da]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+<P><STRONG><a name="[dc]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
 
-<P><STRONG><a name="[db]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+<P><STRONG><a name="[dd]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
 <P><STRONG><a name="[33]"></a>main</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
@@ -1451,20 +1455,20 @@ Local Symbols
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMSMain
 </UL>
 
-<P><STRONG><a name="[4d]"></a>AnalyseMT30</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, module.o(i.AnalyseMT30))
+<P><STRONG><a name="[4b]"></a>AnalyseMT30</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, module.o(i.AnalyseMT30))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
 <LI>Call Chain = AnalyseMT30 &rArr; InitiateMT30 &rArr; WriteCAN1 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT30
+<BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT30
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Module_RECData_Pro
 </UL>
 
-<P><STRONG><a name="[48]"></a>AnalyseMT31</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, module.o(i.AnalyseMT31))
+<P><STRONG><a name="[4d]"></a>AnalyseMT31</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, module.o(i.AnalyseMT31))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
 <LI>Call Chain = AnalyseMT31 &rArr; InitiateMT31 &rArr; WriteCAN1 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT31
+<BR>[Calls]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT31
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ModuleMain
 </UL>
@@ -1485,10 +1489,9 @@ Local Symbols
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitiateMT33
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Module_RECData_Pro
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ModuleMain
 </UL>
 
-<P><STRONG><a name="[53]"></a>AnalyseMT35</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, module.o(i.AnalyseMT35))
+<P><STRONG><a name="[53]"></a>AnalyseMT35</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, module.o(i.AnalyseMT35))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
 <LI>Call Chain = AnalyseMT35 &rArr; InitiateMT35 &rArr; WriteCAN1 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
@@ -1497,25 +1500,26 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Module_RECData_Pro
 </UL>
 
-<P><STRONG><a name="[4e]"></a>InitiateMT30</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, module.o(i.InitiateMT30))
+<P><STRONG><a name="[4c]"></a>InitiateMT30</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, module.o(i.InitiateMT30))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80 + Unknown Stack Size
 <LI>Call Chain = InitiateMT30 &rArr; WriteCAN1 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteCAN1
 </UL>
-<BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT30
+<BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT30
 </UL>
 
-<P><STRONG><a name="[49]"></a>InitiateMT31</STRONG> (Thumb, 290 bytes, Stack size 8 bytes, module.o(i.InitiateMT31))
+<P><STRONG><a name="[4e]"></a>InitiateMT31</STRONG> (Thumb, 312 bytes, Stack size 8 bytes, module.o(i.InitiateMT31))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80 + Unknown Stack Size
 <LI>Call Chain = InitiateMT31 &rArr; WriteCAN1 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WriteCAN1
 </UL>
-<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT31
+<BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT31
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ModuleMain
 </UL>
 
-<P><STRONG><a name="[52]"></a>InitiateMT33</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, module.o(i.InitiateMT33))
+<P><STRONG><a name="[52]"></a>InitiateMT33</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, module.o(i.InitiateMT33))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80 + Unknown Stack Size
 <LI>Call Chain = InitiateMT33 &rArr; WriteCAN1 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
@@ -1553,14 +1557,14 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ModuleMain
 </UL>
 
-<P><STRONG><a name="[7b]"></a>Module_RECData_Pro</STRONG> (Thumb, 650 bytes, Stack size 8 bytes, module.o(i.Module_RECData_Pro))
+<P><STRONG><a name="[7b]"></a>Module_RECData_Pro</STRONG> (Thumb, 622 bytes, Stack size 8 bytes, module.o(i.Module_RECData_Pro))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96 + Unknown Stack Size
 <LI>Call Chain = Module_RECData_Pro &rArr; AnalyseMT35 &rArr; InitiateMT35 &rArr; WriteCAN1 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
 <BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT35
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT33
 <LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT32
-<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT30
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AnalyseMT30
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ModuleMain
 </UL>

@@ -27,7 +27,9 @@ MessageDetail MessageCAN1;                                          /* ÒıÓÃCAN1Í
 
 
 unsigned int  CANID   ;
+unsigned int  CAN1ID   ;
 unsigned char CAN_Data[8]; 
+unsigned char CAN1_Data[8]; 
 /*********************************************************************************************************
 ** Function name:       Enter_SWRst
 ** Descriptions:        ÏòPC»ú·¢ËÍÏÔÊ¾×Ö·û¡£

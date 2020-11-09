@@ -194,8 +194,8 @@ void ModuleMain (void)
 
 	 if(ChargerMsg.StartCompleteflag==1)
 		 {
-		   AnalyseMT33();
-			 ChargerMsg.StartCompleteflag=0;
+		   InitiateMT31();
+			 ChargerMsg.StartCompleteflag=2;
 		 }
 	 }	
 } 
@@ -309,10 +309,8 @@ static void	Module_RECData_Pro(void)
 		     break ;	
 
 		 case 0x103300a0:                  //充电启动帧
-			 if(Sys_PARA.ChargerNO==0){	
-			   AnalyseMT33();
-		     break ;		
-					 }
+			   AnalyseMT33();		
+					break ; 
 			 
 					 
 //B枪监控数据处理					 
@@ -341,9 +339,7 @@ static void	Module_RECData_Pro(void)
 		     break ;	
 
 		 case 0x103301a0:                  //充电启动帧
-			 	 if(Sys_PARA.ChargerNO==1){
 			   AnalyseMT33();
-				 }
 		     break ;	
 
 
@@ -370,89 +366,89 @@ void ModuleSet(uint8_t CMD, uint16_t V, uint16_t I,uint8_t ModuleType)
 							switch(CMD)
 							 {	
 								 case 1:
-									 CANID=0x180180a0|(i<<8);                     //设置电压电流
+									 CAN1ID=0x180180a0|(i<<8);                     //设置电压电流
 									 if(V>5000)
 									 {
-										 CAN_Data[0]=0x75;
+										 CAN1_Data[0]=0x75;
 									 }
 									 else
 									 {
-										 CAN_Data[0]=0x65;
+										 CAN1_Data[0]=0x65;
 									 }							 
-									 CAN_Data[1]=0x00;
-									 CAN_Data[2]=V&0xff;
-									 CAN_Data[3]=(V>>8)&0xff;
-									 CAN_Data[4]=I&0xff;
-									 CAN_Data[5]=(I>>8)&0xff;
-									 CAN_Data[6]=0x0c; 			
-									 CAN_Data[7]=0x17;
-									 WriteCAN1(8,1, CANID,CAN_Data);	
+									 CAN1_Data[1]=0x00;
+									 CAN1_Data[2]=V&0xff;
+									 CAN1_Data[3]=(V>>8)&0xff;
+									 CAN1_Data[4]=I&0xff;
+									 CAN1_Data[5]=(I>>8)&0xff;
+									 CAN1_Data[6]=0x0c; 			
+									 CAN1_Data[7]=0x17;
+									 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 										break;
 									 
 								 case 2:	 
-									 CANID=0x180180a0|(i<<8);                      //快速开机
+									 CAN1ID=0x180180a0|(i<<8);                      //快速开机
 										if(V>5000)
 									 {
-										 CAN_Data[0]=0x11;
+										 CAN1_Data[0]=0x11;
 									 }
 									 else
 									 {
-										 CAN_Data[0]=0x01;
+										 CAN1_Data[0]=0x01;
 									 }	
-									 CAN_Data[0]=0x01;
-									 CAN_Data[1]=0x00;
-									 CAN_Data[2]=V&0xff;
-									 CAN_Data[3]=(V>>8)&0xff;
-									 CAN_Data[4]=I&0xff;
-									 CAN_Data[5]=(I>>8)&0xff;
-									 CAN_Data[6]=0x6c;
-									 CAN_Data[7]=0x07;		 
-									 WriteCAN1(8,1, CANID,CAN_Data);	
+									 CAN1_Data[0]=0x01;
+									 CAN1_Data[1]=0x00;
+									 CAN1_Data[2]=V&0xff;
+									 CAN1_Data[3]=(V>>8)&0xff;
+									 CAN1_Data[4]=I&0xff;
+									 CAN1_Data[5]=(I>>8)&0xff;
+									 CAN1_Data[6]=0x6c;
+									 CAN1_Data[7]=0x07;		 
+									 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 										break;
 									 
 								 case 3:	 
-									 CANID=0x180180a0|(i<<8);                      //软起开机
+									 CAN1ID=0x180180a0|(i<<8);                      //软起开机
 										if(V>5000)
 									 {
-										 CAN_Data[0]=0x11;
+										 CAN1_Data[0]=0x11;
 									 }
 									 else
 									 {
-										 CAN_Data[0]=0x03;
+										 CAN1_Data[0]=0x03;
 									 }	
-									 CAN_Data[0]=0x01;
-									 CAN_Data[1]=0x00;
-									 CAN_Data[2]=V&0xff;
-									 CAN_Data[3]=(V>>8)&0xff;
-									 CAN_Data[4]=I&0xff;
-									 CAN_Data[5]=(I>>8)&0xff;
-									 CAN_Data[6]=0x6c;
-									 CAN_Data[7]=0x07;		 
-									 WriteCAN1(8,1, CANID,CAN_Data);	
+									 CAN1_Data[0]=0x01;
+									 CAN1_Data[1]=0x00;
+									 CAN1_Data[2]=V&0xff;
+									 CAN1_Data[3]=(V>>8)&0xff;
+									 CAN1_Data[4]=I&0xff;
+									 CAN1_Data[5]=(I>>8)&0xff;
+									 CAN1_Data[6]=0x6c;
+									 CAN1_Data[7]=0x07;		 
+									 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 										break;									 
 						 
 								 case 4:	 
-									 CANID=0x180180a0|(i<<8) ;                     //关机
-									 CAN_Data[0]=0x02;
-									 CAN_Data[1]=0x00;
-									 CAN_Data[2]=0x00;
-									 CAN_Data[3]=0x00;
-									 CAN_Data[4]=0x00;
-									 CAN_Data[5]=0x00;
-									 CAN_Data[6]=0x00;
-									 CAN_Data[7]=0x00;					 
-									 WriteCAN1(8,1, CANID,CAN_Data);	
+									 CAN1ID=0x180180a0|(i<<8) ;                     //关机
+									 CAN1_Data[0]=0x02;
+									 CAN1_Data[1]=0x00;
+									 CAN1_Data[2]=0x00;
+									 CAN1_Data[3]=0x00;
+									 CAN1_Data[4]=0x00;
+									 CAN1_Data[5]=0x00;
+									 CAN1_Data[6]=0x00;
+									 CAN1_Data[7]=0x00;					 
+									 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 								 case 5:	 
-									 CANID=0x184080a0|(i<<8) ;                     //心跳
-									 CAN_Data[0]=0x00;
-									 CAN_Data[1]=0x00;
-									 CAN_Data[2]=0x00;
-									 CAN_Data[3]=0x00;
-									 CAN_Data[4]=0x00;
-									 CAN_Data[5]=0x00;
-									 CAN_Data[6]=0x00; 
-									 CAN_Data[7]=0x00;					 
-									 WriteCAN1(8,1, CANID,CAN_Data);	
+									 CAN1ID=0x184080a0|(i<<8) ;                     //心跳
+									 CAN1_Data[0]=0x00;
+									 CAN1_Data[1]=0x00;
+									 CAN1_Data[2]=0x00;
+									 CAN1_Data[3]=0x00;
+									 CAN1_Data[4]=0x00;
+									 CAN1_Data[5]=0x00;
+									 CAN1_Data[6]=0x00; 
+									 CAN1_Data[7]=0x00;					 
+									 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 										break;
 								 default:
 										break;			 		 
@@ -466,45 +462,45 @@ void ModuleSet(uint8_t CMD, uint16_t V, uint16_t I,uint8_t ModuleType)
 							switch(CMD)
 							 {	
 								 case 1:
-									 CANID=0x02DB00F0|(i<<8);                     //设置电压电流
+									 CAN1ID=0x02DB00F0|(i<<8);                     //设置电压电流
 										 
-									 CAN_Data[0]=0x00;
-									 CAN_Data[1]=(V*100>>16)&0xff;
-									 CAN_Data[2]=(V*100>>8)&0xff;
-									 CAN_Data[3]=(V*100)&0xff;
-									 CAN_Data[4]=0x00;
-									 CAN_Data[5]=(V*100>>16)&0xff;; 			
-									 CAN_Data[6]=(V*100>>8)&0xff;
-									 CAN_Data[7]=(V*100)&0xff; 							 					 
-									 WriteCAN1(8,1, CANID,CAN_Data);	
+									 CAN1_Data[0]=0x00;
+									 CAN1_Data[1]=(V*100>>16)&0xff;
+									 CAN1_Data[2]=(V*100>>8)&0xff;
+									 CAN1_Data[3]=(V*100)&0xff;
+									 CAN1_Data[4]=0x00;
+									 CAN1_Data[5]=(V*100>>16)&0xff;; 			
+									 CAN1_Data[6]=(V*100>>8)&0xff;
+									 CAN1_Data[7]=(V*100)&0xff; 							 					 
+									 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 										break;
 									 
 								 case 2:	 
-									 CANID=0x02DA00F0|(i<<8);                      //快速开机								 
-									 CAN_Data[0]=0x00;
-									 CAN_Data[1]=0x00;
-									 CAN_Data[2]=0x00;
-									 CAN_Data[3]=0x00;
-									 CAN_Data[4]=0x00;
-									 CAN_Data[5]=0x00;
-									 CAN_Data[6]=0x00;
-									 CAN_Data[7]=0x00;		 
-									 WriteCAN1(8,1, CANID,CAN_Data);	
+									 CAN1ID=0x02DA00F0|(i<<8);                      //快速开机								 
+									 CAN1_Data[0]=0x00;
+									 CAN1_Data[1]=0x00;
+									 CAN1_Data[2]=0x00;
+									 CAN1_Data[3]=0x00;
+									 CAN1_Data[4]=0x00;
+									 CAN1_Data[5]=0x00;
+									 CAN1_Data[6]=0x00;
+									 CAN1_Data[7]=0x00;		 
+									 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 										break;
 								 
 								 case 3:
 									  break;
 								 case 4:	 
-									 CANID=0x02DA00F0|(i<<8);                     //关机
-									 CAN_Data[0]=0x01;
-									 CAN_Data[1]=0x00;
-									 CAN_Data[2]=0x00;
-									 CAN_Data[3]=0x00;
-									 CAN_Data[4]=0x00;
-									 CAN_Data[5]=0x00;
-									 CAN_Data[6]=0x00;
-									 CAN_Data[7]=0x00;					 
-									 WriteCAN1(8,1, CANID,CAN_Data);	
+									 CAN1ID=0x02DA00F0|(i<<8);                     //关机
+									 CAN1_Data[0]=0x01;
+									 CAN1_Data[1]=0x00;
+									 CAN1_Data[2]=0x00;
+									 CAN1_Data[3]=0x00;
+									 CAN1_Data[4]=0x00;
+									 CAN1_Data[5]=0x00;
+									 CAN1_Data[6]=0x00;
+									 CAN1_Data[7]=0x00;					 
+									 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 
 								 default:
 										break;			 		 
@@ -544,44 +540,44 @@ void ModuleGet(uint8_t CMD,uint32_t Voltage,uint32_t Current,uint8_t err)
 						case 0:                                             //读输出电压和电流
 							 for(i=0;i<ModuleMsg.NOcount;i++)
 			          {	
-								 CANID=0x02C800F0|(i<<8);						
-								 CAN_Data[0]=0x00;
-								 CAN_Data[1]=0x00;
-								 CAN_Data[2]=0x00;
-								 CAN_Data[3]=0x00;
-								 CAN_Data[4]=0x00;
-								 CAN_Data[5]=0x00;
-								 CAN_Data[6]=0x00; 
-								 CAN_Data[7]=0x00;				
-								 WriteCAN1(8,1, CANID,CAN_Data);
+								 CAN1ID=0x02C800F0|(i<<8);						
+								 CAN1_Data[0]=0x00;
+								 CAN1_Data[1]=0x00;
+								 CAN1_Data[2]=0x00;
+								 CAN1_Data[3]=0x00;
+								 CAN1_Data[4]=0x00;
+								 CAN1_Data[5]=0x00;
+								 CAN1_Data[6]=0x00; 
+								 CAN1_Data[7]=0x00;				
+								 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 								}									
 								break;
 								
 						case 1:
-								CANID=0x02C600F0|(i<<8);                           //读输入电压						
-								 CAN_Data[0]=0x00;
-								 CAN_Data[1]=0x00;
-								 CAN_Data[2]=0x00;
-								 CAN_Data[3]=0x00;
-								 CAN_Data[4]=0x00;
-								 CAN_Data[5]=0x00;
-								 CAN_Data[6]=0x00; 
-								 CAN_Data[7]=0x00;				
-								 WriteCAN1(8,1, CANID,CAN_Data);															
+								CAN1ID=0x02C600F0|(i<<8);                           //读输入电压						
+								 CAN1_Data[0]=0x00;
+								 CAN1_Data[1]=0x00;
+								 CAN1_Data[2]=0x00;
+								 CAN1_Data[3]=0x00;
+								 CAN1_Data[4]=0x00;
+								 CAN1_Data[5]=0x00;
+								 CAN1_Data[6]=0x00; 
+								 CAN1_Data[7]=0x00;				
+								 WriteCAN1(8,1, CAN1ID,CAN1_Data);															
 								break;
 						
 						case 2:
-								CANID=0x02C400F0|(i<<8);                           //读模块故障状态
+								CAN1ID=0x02C400F0|(i<<8);                           //读模块故障状态
 						
-								 CAN_Data[0]=0x00;
-								 CAN_Data[1]=0x00;
-								 CAN_Data[2]=0x00;
-								 CAN_Data[3]=0x00;
-								 CAN_Data[4]=0x00;
-								 CAN_Data[5]=0x00;
-								 CAN_Data[6]=0x00; 
-								 CAN_Data[7]=0x00;				
-								 WriteCAN1(8,1, CANID,CAN_Data);					
+								 CAN1_Data[0]=0x00;
+								 CAN1_Data[1]=0x00;
+								 CAN1_Data[2]=0x00;
+								 CAN1_Data[3]=0x00;
+								 CAN1_Data[4]=0x00;
+								 CAN1_Data[5]=0x00;
+								 CAN1_Data[6]=0x00; 
+								 CAN1_Data[7]=0x00;				
+								 WriteCAN1(8,1, CAN1ID,CAN1_Data);					
 								break;		
 											
 						default:
@@ -631,223 +627,222 @@ void AnalyseMT34(void)
 
 
 void AnalyseMT35(void)
-{	
-	
-	
-	
-	
-	 if(Sys_PARA.ChargerNO==0)
-	{
-		if((MessageCAN1.DATAA&0xff)==0x05)
-		{			       
-				InitiateMT35();		
-		 }
-	 }
-	   
+{		
+		if((MessageCAN1.DATAA&0xff)==0x01)
+		{	
+			ChargerMsg.ChargeVoltage =  MessageCAN1.DATAA>>8;
+			ChargerMsg.ChargeCurrent =  MessageCAN1.DATAB>>8;
+	  }
+		 if(Sys_PARA.ChargerNO==0)
+		{
+			if((MessageCAN1.DATAA&0xff)==0x05)
+			{			       
+					InitiateMT35();		
+			 }
+		 }	   
 }
-
 
 void InitiateMT30(void)
 {	
 		 if(Sys_PARA.ChargerNO==0){	
-			 CANID=0x1030a000;  
+			 CAN1ID=0x1030a000;  
 	  }else{
-			 CANID=0x1030a001; 
+			 CAN1ID=0x1030a001; 
 		}	 
-			 CAN_Data[0]=0x00;
-			 CAN_Data[1]=0x00;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;
-			 CAN_Data[7]=0x00;		
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x00;
+			 CAN1_Data[1]=0x00;
+			 CAN1_Data[2]=0x00;
+			 CAN1_Data[3]=0x00;
+			 CAN1_Data[4]=0x00;
+			 CAN1_Data[5]=0x00;
+			 CAN1_Data[6]=0x00;
+			 CAN1_Data[7]=0x00;		
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
 void InitiateMT31(void)
 {	
 	 if(Sys_PARA.ChargerNO==0){	
-			 CANID=0x1031a000;  
+			 CAN1ID=0x1031a000;  
 	  }else{
-			 CANID=0x1031a001; 
+			 CAN1ID=0x1031a001; 
 		}		 	
-			 CAN_Data[0]=0x01;
-			 CAN_Data[1]=0x02;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;	
-			 CAN_Data[7]=0x00;		
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x01;
+			 CAN1_Data[1]=0x00;
+			 CAN1_Data[2]=0x00;
+			 CAN1_Data[3]=0x00;
+			 CAN1_Data[4]=0x00;
+			 CAN1_Data[5]=0x00;
+			 CAN1_Data[6]=0x00;	
+			 CAN1_Data[7]=0x00;		
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 
-			 CAN_Data[0]=0x02;
-			 CAN_Data[1]=0x02;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;		
-			 CAN_Data[7]=0x00;			
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x02;
+			 CAN1_Data[1]=0x00;
+			 CAN1_Data[2]=0x04;
+			 CAN1_Data[3]=0x78;
+			 CAN1_Data[4]=0x4c;
+			 CAN1_Data[5]=0x1d;
+			 CAN1_Data[6]=0xa4;		
+			 CAN1_Data[7]=0x01;			
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 
-			 CAN_Data[0]=0x03;
-			 CAN_Data[1]=0x02;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;		
-			 CAN_Data[7]=0x00;					 
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x03;
+			 CAN1_Data[1]=0xd0;
+			 CAN1_Data[2]=0x07;
+			 CAN1_Data[3]=0x44;
+			 CAN1_Data[4]=0x02;
+			 CAN1_Data[5]=0x40;
+			 CAN1_Data[6]=0x02;		
+			 CAN1_Data[7]=0x08;					 
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 
-			 CAN_Data[0]=0x04;
-			 CAN_Data[1]=0x02;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;
-			 CAN_Data[7]=0x00;					 
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x04;
+			 CAN1_Data[1]=0x07;
+			 CAN1_Data[2]=0xf4;
+			 CAN1_Data[3]=0x01;
+			 CAN1_Data[4]=0x58;
+			 CAN1_Data[5]=0x02;
+			 CAN1_Data[6]=0xff;
+			 CAN1_Data[7]=0xff;					 
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 
-			 CAN_Data[0]=0x05;
-			 CAN_Data[1]=0x02;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;	
-			 CAN_Data[7]=0x00;					 
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x05;
+			 CAN1_Data[1]=0xff;
+			 CAN1_Data[2]=0xff;
+			 CAN1_Data[3]=0xff;
+			 CAN1_Data[4]=0xff;
+			 CAN1_Data[5]=0xff;
+			 CAN1_Data[6]=0xff;	
+			 CAN1_Data[7]=0xff;					 
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 
-			 CAN_Data[0]=0x06;
-			 CAN_Data[1]=0x02;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;	
-			 CAN_Data[7]=0x00;					 
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x06;
+			 CAN1_Data[1]=0xff;
+			 CAN1_Data[2]=0xff;
+			 CAN1_Data[3]=0xff;
+			 CAN1_Data[4]=0xff;
+			 CAN1_Data[5]=0xff;
+			 CAN1_Data[6]=0xff;	
+			 CAN1_Data[7]=0xff;					 
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 
-			 CAN_Data[0]=0x07;
-			 CAN_Data[1]=0x02;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;	
-			 CAN_Data[7]=0x00;					 
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x07;
+			 CAN1_Data[1]=0xff;
+			 CAN1_Data[2]=0xff;
+			 CAN1_Data[3]=0xff;
+			 CAN1_Data[4]=0xff;
+			 CAN1_Data[5]=0xff;
+			 CAN1_Data[6]=0xff;	
+			 CAN1_Data[7]=0xff;					 
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
 void InitiateMT32(void)
 {	
 		 if(Sys_PARA.ChargerNO==0){	
-			 CANID=0x1032a000;  
+			 CAN1ID=0x1032a000;  
 	  }else{
-			 CANID=0x1032a001; 
+			 CAN1ID=0x1032a001; 
 		}		                       
-			 CAN_Data[0]=0x00;
-			 CAN_Data[1]=0x00;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;			
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x00;
+			 CAN1_Data[1]=0x00;
+			 CAN1_Data[2]=0x00;
+			 CAN1_Data[3]=0x00;
+			 CAN1_Data[4]=0x00;
+			 CAN1_Data[5]=0x00;
+			 CAN1_Data[6]=0x00;			
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
 void InitiateMT33(void)
 {	
 		 if(Sys_PARA.ChargerNO==0){	
-			 CANID=0x1033a000;  
+			 CAN1ID=0x1033a000;  
 	  }else{
-			 CANID=0x1033a001; 
+			 CAN1ID=0x1033a001; 
 		}	                    
-			 CAN_Data[0]=0x00;
-			 CAN_Data[1]=0x02;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;			
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[0]=0x00;
+			 CAN1_Data[1]=0x00;
+			 CAN1_Data[2]=0x00;
+			 CAN1_Data[3]=0x00;
+			 CAN1_Data[4]=0x00;
+			 CAN1_Data[5]=0x00;
+			 CAN1_Data[6]=0x00;			
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
 void InitiateMT34(void)
 {	
 		 if(Sys_PARA.ChargerNO==0){	
-			 CANID=0x1834a000;  
+			 CAN1ID=0x1834a000;  
 	  }else{
-			 CANID=0x1834a001; 
+			 CAN1ID=0x1834a001; 
 		}	  
     if(ADstatus == ADC4V)	
      {
-			 CAN_Data[0]=1<<2;
+			 CAN1_Data[0]=1<<2;
      }
 		 else{
-			 CAN_Data[0]=0x00;
+			 CAN1_Data[0]=0x00;
 		 }
-			 CAN_Data[1]=0x00;
-			 CAN_Data[2]=0x00;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;			
-			 WriteCAN1(8,1, CANID,CAN_Data);
+			 CAN1_Data[1]=0x00;
+			 CAN1_Data[2]=0x00;
+			 CAN1_Data[3]=0x00;
+			 CAN1_Data[4]=0x00;
+			 CAN1_Data[5]=0x00;
+			 CAN1_Data[6]=0x00;			
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
 void InitiateMT35(void)
 {	
 		 if(Sys_PARA.ChargerNO==0){	
-			 CANID=0x1835a000;  
+			 CAN1ID=0x1835a000;  
 	  }else{
-			 CANID=0x1835a001; 
+			 CAN1ID=0x1835a001; 
 		}	                      
-			 CAN_Data[0]=0x01;
-			 CAN_Data[1]=0x00;
-			 CAN_Data[2]=ChargerMsg.ChargeVoltage&0xff;
-			 CAN_Data[3]=(ChargerMsg.ChargeVoltage>>8)&0xff;
-			 CAN_Data[4]=(4000-ChargerMsg.ChargeCurrent)&0xff;
-			 CAN_Data[5]=((4000-ChargerMsg.ChargeCurrent)>>8)&0xff;
-			 CAN_Data[6]=BMSMessage.SOC;			
-	 		 CAN_Data[7]=BMSMessage.MINBatteryTemp;		
-			 WriteCAN1(8,1, CANID,CAN_Data);	
+			 CAN1_Data[0]=0x01;
+			 CAN1_Data[1]=0x04;
+			 CAN1_Data[2]=ChargerMsg.ChargeVoltage&0xff;
+			 CAN1_Data[3]=(ChargerMsg.ChargeVoltage>>8)&0xff;
+			 CAN1_Data[4]=(4000-ChargerMsg.ChargeCurrent)&0xff;
+			 CAN1_Data[5]=((4000-ChargerMsg.ChargeCurrent)>>8)&0xff;
+			 CAN1_Data[6]=BMSMessage.SOC;			
+	 		 CAN1_Data[7]=BMSMessage.MINBatteryTemp;		
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 	 
-	     CAN_Data[0]=0x02;
-			 CAN_Data[1]=BMSMessage.MAXBatteryTemp;
-			 CAN_Data[2]=BMSMessage.MAXSingleVoltage&0xff;
-			 CAN_Data[3]=(BMSMessage.MAXSingleVoltage>>8)&0xff;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=BMSMessage.RequestVoltage&0xff;			
-	 		 CAN_Data[7]=(BMSMessage.RequestVoltage>>8)&0xff;	 	 
-			 WriteCAN1(8,1, CANID,CAN_Data);	 
+	     CAN1_Data[0]=0x02;
+			 CAN1_Data[1]=BMSMessage.MAXBatteryTemp;
+			 CAN1_Data[2]=BMSMessage.MAXSingleVoltage&0xff;
+			 CAN1_Data[3]=(BMSMessage.MAXSingleVoltage>>8)&0xff;
+			 CAN1_Data[4]=0x00;
+			 CAN1_Data[5]=0x00;
+			 CAN1_Data[6]=BMSMessage.RequestVoltage&0xff;			
+	 		 CAN1_Data[7]=(BMSMessage.RequestVoltage>>8)&0xff;	 	 
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);	 
 	 
-	     CAN_Data[0]=0x03;
-			 CAN_Data[1]=(4000-BMSMessage.RequestCurrent)&0xff;
-			 CAN_Data[2]=((4000-BMSMessage.RequestCurrent)>>8)&0xff;
-			 CAN_Data[3]=BMSMessage.RequestChargeMode;
-			 CAN_Data[4]=BMSMessage.BCSdetVoltage&0xff;
-			 CAN_Data[5]=(BMSMessage.BCSdetVoltage>>8)&0xff;
-			 CAN_Data[6]=(4000-BMSMessage.BCSdetCurrent)&0xff;			
-	 		 CAN_Data[7]=((4000-BMSMessage.BCSdetCurrent)>>8)&0xff;				 			 
-			 WriteCAN1(8,1, CANID,CAN_Data);	
+	     CAN1_Data[0]=0x03;
+			 CAN1_Data[1]=(4000-BMSMessage.RequestCurrent)&0xff;
+			 CAN1_Data[2]=((4000-BMSMessage.RequestCurrent)>>8)&0xff;
+			 CAN1_Data[3]=BMSMessage.RequestChargeMode;
+			 CAN1_Data[4]=BMSMessage.BCSdetVoltage&0xff;
+			 CAN1_Data[5]=(BMSMessage.BCSdetVoltage>>8)&0xff;
+			 CAN1_Data[6]=(4000-BMSMessage.BCSdetCurrent)&0xff;			
+	 		 CAN1_Data[7]=((4000-BMSMessage.BCSdetCurrent)>>8)&0xff;				 			 
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 			 
-	     CAN_Data[0]=0x04;
-			 CAN_Data[1]=BMSMessage.RemainTime&0xff;
-			 CAN_Data[2]=(BMSMessage.RemainTime>>8)&0xff;
-			 CAN_Data[3]=0x00;
-			 CAN_Data[4]=0x00;
-			 CAN_Data[5]=0x00;
-			 CAN_Data[6]=0x00;			
-	 		 CAN_Data[7]=0x00;				 
-			 WriteCAN1(8,1, CANID,CAN_Data);	
+	     CAN1_Data[0]=0x04;
+			 CAN1_Data[1]=BMSMessage.RemainTime&0xff;
+			 CAN1_Data[2]=(BMSMessage.RemainTime>>8)&0xff;
+			 CAN1_Data[3]=0x00;
+			 CAN1_Data[4]=0x00;
+			 CAN1_Data[5]=0x00;
+			 CAN1_Data[6]=0x00;			
+	 		 CAN1_Data[7]=0x00;				 
+			 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 }
 void InitiateMT36(void)
 {	
 			 if(Sys_PARA.ChargerNO==0){	
-			 CANID=0x1835a000;  
+			 CAN1ID=0x1835a000;  
 	  }else{
-			 CANID=0x1835a001; 
+			 CAN1ID=0x1835a001; 
 		}
 	
 	
@@ -858,9 +853,9 @@ void InitiateMT36(void)
 void InitiateMT37(void)
 {	
 			 if(Sys_PARA.ChargerNO==0){	
-			 CANID=0x1835a000;  
+			 CAN1ID=0x1835a000;  
 	  }else{
-			 CANID=0x1835a001; 
+			 CAN1ID=0x1835a001; 
 		}
 	
 	
