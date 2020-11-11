@@ -616,13 +616,12 @@ void AnalyseMT34(uint8_t	port)
 	
 }
 
-
 void AnalyseMT35(uint8_t	port)
 {		
 		if((MessageCAN1.DATAA&0xff)==0x01)
 		{	
-			ChargerMsg.ChargeVoltage =  MessageCAN1.DATAA>>8;
-			ChargerMsg.ChargeCurrent =  MessageCAN1.DATAB>>8;
+			ChargerMsg.ChargeVoltage =  (MessageCAN1.DATAA>>8)/100;
+			ChargerMsg.ChargeCurrent =  (MessageCAN1.DATAB>>8)/100;
 	  }
 		if((MessageCAN1.DATAA&0xff)==0x03)
 		{			       
