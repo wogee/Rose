@@ -28,29 +28,33 @@ Project File Date:  10/12/2020
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'D:\software\MDK\ARM\ARMCC\Bin'
 Build target 'CHARGER'
 compiling module.c...
-User\module.c(514): warning:  #177-D: function "ModuleGet"  was declared but never referenced
+User\module.c(505): warning:  #177-D: function "ModuleGet"  was declared but never referenced
   void ModuleGet(uint8_t CMD,uint32_t Voltage,uint32_t Current,uint8_t err)
-User\module.c(623): warning:  #177-D: function "AnalyseMT34"  was declared but never referenced
-  void AnalyseMT34(void)
+User\module.c(598): warning:  #177-D: function "AnalyseMT31"  was declared but never referenced
+  void AnalyseMT31(uint8_t	port)
+User\module.c(609): warning:  #177-D: function "AnalyseMT33"  was declared but never referenced
+  void AnalyseMT33(uint8_t	port)
+User\module.c(614): warning:  #177-D: function "AnalyseMT34"  was declared but never referenced
+  void AnalyseMT34(uint8_t	port)
 User\module.c(26): warning:  #177-D: function "AnalyseMT36"  was declared but never referenced
-  static void AnalyseMT36(void);
+  static void AnalyseMT36(uint8_t	port);
 User\module.c(27): warning:  #177-D: function "AnalyseMT37"  was declared but never referenced
-  static void AnalyseMT37(void);
-User\module.c(739): warning:  #177-D: function "InitiateMT32"  was declared but never referenced
-  void InitiateMT32(void)
-User\module.c(840): warning:  #177-D: function "InitiateMT36"  was declared but never referenced
-  void InitiateMT36(void)
-User\module.c(853): warning:  #177-D: function "InitiateMT37"  was declared but never referenced
-  void InitiateMT37(void)
-User\module.c(868): warning:  #177-D: function "ChargerDivider50"  was declared but never referenced
+  static void AnalyseMT37(uint8_t	port);
+User\module.c(728): warning:  #177-D: function "InitiateMT32"  was declared but never referenced
+  void InitiateMT32(uint8_t port)
+User\module.c(837): warning:  #177-D: function "InitiateMT36"  was declared but never referenced
+  void InitiateMT36(uint8_t port)
+User\module.c(850): warning:  #177-D: function "InitiateMT37"  was declared but never referenced
+  void InitiateMT37(uint8_t port)
+User\module.c(865): warning:  #177-D: function "ChargerDivider50"  was declared but never referenced
   void ChargerDivider50(uint32_t Voltage,uint32_t Current)
 User\module.c(45): warning:  #177-D: variable "PowerDividerFlag"  was declared but never referenced
   static uint8_t  PowerDividerFlag;
-User\module.c: 9 warnings, 0 errors
+User\module.c: 11 warnings, 0 errors
 linking...
-Program Size: Code=19932 RO-data=632 RW-data=304 ZI-data=13192  
+Program Size: Code=20024 RO-data=632 RW-data=308 ZI-data=13188  
 FromELF: creating hex file...
-".\Flash\Charger.axf" - 0 Error(s), 9 Warning(s).
+".\Flash\Charger.axf" - 0 Error(s), 11 Warning(s).
 
 <h2>Software Packages used:</h2>
 

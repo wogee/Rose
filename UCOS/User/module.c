@@ -17,23 +17,23 @@ static void	Module_RECData_Pro(void);
 static void ModuleSet(uint8_t CMD, uint16_t V, uint16_t I,uint8_t ModuleType);
 static void ModuleGet(uint8_t CMD,uint32_t Voltage,uint32_t Current,uint8_t err);
 
-static void AnalyseMT30(void);
-static void AnalyseMT31(void);
-static void AnalyseMT32(void);
-static void AnalyseMT33(void);
-static void AnalyseMT34(void);
-static void AnalyseMT35(void);
-static void AnalyseMT36(void);
-static void AnalyseMT37(void);
+static void AnalyseMT30(uint8_t	port);
+static void AnalyseMT31(uint8_t	port);
+static void AnalyseMT32(uint8_t	port);
+static void AnalyseMT33(uint8_t	port);
+static void AnalyseMT34(uint8_t	port);
+static void AnalyseMT35(uint8_t	port);
+static void AnalyseMT36(uint8_t	port);
+static void AnalyseMT37(uint8_t	port);
 
-static void InitiateMT30(void);
-static void InitiateMT31(void);
-static void InitiateMT32(void);
-static void InitiateMT33(void);
-static void InitiateMT34(void);
-static void InitiateMT35(void);
-static void InitiateMT36(void);
-static void InitiateMT37(void);
+static void InitiateMT30(uint8_t	port);
+static void InitiateMT31(uint8_t	port);
+static void InitiateMT32(uint8_t	port);
+static void InitiateMT33(uint8_t	port);
+static void InitiateMT34(uint8_t	port);
+static void InitiateMT35(uint8_t	port);
+static void InitiateMT36(uint8_t	port);
+static void InitiateMT37(uint8_t	port);
 static void ChargerDivider50(uint32_t Voltage,uint32_t Current);
 
 
@@ -130,14 +130,13 @@ void ModuleMain (void)
 										ModuleSet(3,BMSMessage.BatteryVoltage-50,ModuleMsg.NOcount*200,ModuleMsg.ModuleType);	// 开机预充
 										OSTimeDlyHMSM(0,0,0,20); 
 										ModuleMsg.StartFlag=1;                                            // 开机标识
-										AnalyseMT31();                                                    // 启动完成	
+										InitiateMT31(Sys_PARA.ChargerNO);                                                    // 启动完成	
 								 }
                  else{
 								    ModuleSet(1,BMSMessage.RequestVoltage,BMSMessage.RequestCurrent*10/ModuleMsg.NOcount,ModuleMsg.ModuleType);
 								 }								 
 								 if((BMSMessage.BatteryVoltage-ModuleMsg.OutVoltage)<=100)
 								 {
-
 											DC_SWITCH_ON();                                              //吸合直流接触器
 											OSTimeDlyHMSM(0,0,0,20);								 
 											ChargerMsg.DCSwitchFlag=1;
@@ -189,13 +188,13 @@ void ModuleMain (void)
 	
    if(((MonitorMsg.Cnt)%50)==0)
 	 {
-	   InitiateMT34();	 
+	   InitiateMT34(Sys_PARA.ChargerNO);	 
 	 }
 
-	 if(ChargerMsg.StartCompleteflag==1)
+	 if(ChargerMsg.StopCompleteflag==1)
 		 {
-		   InitiateMT31();
-			 ChargerMsg.StartCompleteflag=2;
+		   InitiateMT33(Sys_PARA.ChargerNO);
+			 ChargerMsg.StopCompleteflag=0;
 		 }
 	 }	
 } 
@@ -279,22 +278,20 @@ static void	Module_RECData_Pro(void)
 										ModuleMsg.OutVoltage=(MessageCAN1.DATAA&0xffffff)/100;
 										ModuleCurrent[3]=(MessageCAN1.DATAB&0xffff)/10;
 								 break ;
-
-
-					 
-										
-										
+									
 /***************************************************************************************************
 	                             监控端的数据处理
 **************************************************************************************************/		
 //A枪监控数据处理
-		 case 0x183500a0:                //遥测帧 			 
-					 AnalyseMT35();			 
+		 case 0x183500a0:                  //遥测帧 	
+			 if(Sys_PARA.ChargerNO==0){				 
+					 AnalyseMT35(Sys_PARA.ChargerNO);	
+			 }				 
 		     break ;
 		 
 		 case 0x103000a0:                  //充电启动帧
 			 if(Sys_PARA.ChargerNO==0){			 
-			     AnalyseMT30();
+			     AnalyseMT30(Sys_PARA.ChargerNO);
 			   }
 		     break ;		
 				 
@@ -304,28 +301,24 @@ static void	Module_RECData_Pro(void)
 		 
 		 case 0x103200a0:                  //停止充电帧     
 			 if(Sys_PARA.ChargerNO==0){	
-			   AnalyseMT32();
+			   AnalyseMT32(Sys_PARA.ChargerNO);
 			 }		 
 		     break ;	
 
-		 case 0x103300a0:                  //充电启动帧
-			   AnalyseMT33();		
+		 case 0x103300a0:                  //停止完成帧			 
 					break ; 
 			 
 					 
 //B枪监控数据处理					 
-		 case 0x183501a0: 			  
-			 if(Sys_PARA.ChargerNO==1){		 
-        if((MessageCAN1.DATAA&0xff)==0x05)
-		    {			          
-			   AnalyseMT35();		
-		     }
-			 }
+		 case 0x183501a0: 	
+			 if(Sys_PARA.ChargerNO==1){				 
+			   AnalyseMT35(Sys_PARA.ChargerNO);
+			 }				 
 		     break ;
 		 
 		 case 0x103001a0:                  //充电启动帧
 			 	if(Sys_PARA.ChargerNO==1){
-			   AnalyseMT30();
+			   AnalyseMT30(Sys_PARA.ChargerNO);
 				}
 		     break ;		 
 
@@ -334,14 +327,12 @@ static void	Module_RECData_Pro(void)
 		 
 		 case 0x103201a0:                  //停止充电帧     
 			   if(Sys_PARA.ChargerNO==1){
-			   AnalyseMT32();
+			   AnalyseMT32(Sys_PARA.ChargerNO);
 				 }
 		     break ;	
 
-		 case 0x103301a0:                  //充电启动帧
-			   AnalyseMT33();
+		 case 0x103301a0:                  //停止完成帧
 		     break ;	
-
 
 	 	 default:
 			   break ;		 				 
@@ -598,53 +589,51 @@ void ModuleGet(uint8_t CMD,uint32_t Voltage,uint32_t Current,uint8_t err)
 /**************************************************************************************************************
   监控的函数处理
 **************************************************************************************************************/
-void AnalyseMT30(void)
+void AnalyseMT30(uint8_t	port)
 {	
 	    ChargerMsg.ChargeStage=1;	
-		  InitiateMT30();	
+		  InitiateMT30(port);	
 }
 
-void AnalyseMT31(void)
+void AnalyseMT31(uint8_t	port)
 {	
-		  InitiateMT31();
+		  InitiateMT31(port);
 }
 
-void AnalyseMT32(void)
+void AnalyseMT32(uint8_t	port)
 {	
 	    ChargerMsg.ChargeStage=8;
-	    InitiateMT35();	
+	    InitiateMT35(port);	
 }
 
-void AnalyseMT33(void)
+void AnalyseMT33(uint8_t	port)
 {	
-		 InitiateMT33();
+		 InitiateMT33(port);
 }
 
-void AnalyseMT34(void)
+void AnalyseMT34(uint8_t	port)
 {	
 	
 }
 
 
-void AnalyseMT35(void)
+void AnalyseMT35(uint8_t	port)
 {		
 		if((MessageCAN1.DATAA&0xff)==0x01)
 		{	
 			ChargerMsg.ChargeVoltage =  MessageCAN1.DATAA>>8;
 			ChargerMsg.ChargeCurrent =  MessageCAN1.DATAB>>8;
 	  }
-		 if(Sys_PARA.ChargerNO==0)
-		{
-			if((MessageCAN1.DATAA&0xff)==0x05)
-			{			       
-					InitiateMT35();		
-			 }
-		 }	   
+		if((MessageCAN1.DATAA&0xff)==0x03)
+		{			       
+				InitiateMT35(port);		
+		 }
+		 	   
 }
 
-void InitiateMT30(void)
+void InitiateMT30(uint8_t	port)
 {	
-		 if(Sys_PARA.ChargerNO==0){	
+		 if(port==0){	
 			 CAN1ID=0x1030a000;  
 	  }else{
 			 CAN1ID=0x1030a001; 
@@ -659,21 +648,21 @@ void InitiateMT30(void)
 			 CAN1_Data[7]=0x00;		
 			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
-void InitiateMT31(void)
+void InitiateMT31(uint8_t	port)
 {	
-	 if(Sys_PARA.ChargerNO==0){	
+	 if(port==0){	
 			 CAN1ID=0x1031a000;  
 	  }else{
 			 CAN1ID=0x1031a001; 
 		}		 	
 			 CAN1_Data[0]=0x01;
-			 CAN1_Data[1]=0x00;
-			 CAN1_Data[2]=0x00;
+			 CAN1_Data[1]=0x00;                                 //成功标识
+			 CAN1_Data[2]=0x00;                                 //失败原因
 			 CAN1_Data[3]=0x00;
-			 CAN1_Data[4]=0x00;
+			 CAN1_Data[4]=0x01;
 			 CAN1_Data[5]=0x00;
 			 CAN1_Data[6]=0x00;	
-			 CAN1_Data[7]=0x00;		
+			 CAN1_Data[7]=0x01;		
 			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 
 			 CAN1_Data[0]=0x02;
@@ -736,9 +725,9 @@ void InitiateMT31(void)
 			 CAN1_Data[7]=0xff;					 
 			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
-void InitiateMT32(void)
+void InitiateMT32(uint8_t port)
 {	
-		 if(Sys_PARA.ChargerNO==0){	
+		 if(port==0){	
 			 CAN1ID=0x1032a000;  
 	  }else{
 			 CAN1ID=0x1032a001; 
@@ -752,9 +741,9 @@ void InitiateMT32(void)
 			 CAN1_Data[6]=0x00;			
 			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
-void InitiateMT33(void)
+void InitiateMT33(uint8_t port)
 {	
-		 if(Sys_PARA.ChargerNO==0){	
+		 if(port==0){	
 			 CAN1ID=0x1033a000;  
 	  }else{
 			 CAN1ID=0x1033a001; 
@@ -768,9 +757,9 @@ void InitiateMT33(void)
 			 CAN1_Data[6]=0x00;			
 			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
-void InitiateMT34(void)
+void InitiateMT34(uint8_t port)
 {	
-		 if(Sys_PARA.ChargerNO==0){	
+		 if(port==0){	
 			 CAN1ID=0x1834a000;  
 	  }else{
 			 CAN1ID=0x1834a001; 
@@ -787,18 +776,26 @@ void InitiateMT34(void)
 			 CAN1_Data[3]=0x00;
 			 CAN1_Data[4]=0x00;
 			 CAN1_Data[5]=0x00;
-			 CAN1_Data[6]=0x00;			
+			 CAN1_Data[6]=0x00;
+			 CAN1_Data[7]=0x00;		 
 			 WriteCAN1(8,1, CAN1ID,CAN1_Data);
 }
-void InitiateMT35(void)
+void InitiateMT35(uint8_t port)
 {	
-		 if(Sys_PARA.ChargerNO==0){	
+		 if(port==0){	
 			 CAN1ID=0x1835a000;  
 	  }else{
 			 CAN1ID=0x1835a001; 
-		}	                      
-			 CAN1_Data[0]=0x01;
-			 CAN1_Data[1]=0x04;
+		}	  
+		
+			 CAN1_Data[0]=0x01;		  
+		  if(ChargerMsg.ChargeStage==0)
+			{
+				CAN1_Data[1]=0x00;
+			}
+			else{
+				CAN1_Data[1]=0x01;
+			}
 			 CAN1_Data[2]=ChargerMsg.ChargeVoltage&0xff;
 			 CAN1_Data[3]=(ChargerMsg.ChargeVoltage>>8)&0xff;
 			 CAN1_Data[4]=(4000-ChargerMsg.ChargeCurrent)&0xff;
@@ -837,9 +834,9 @@ void InitiateMT35(void)
 	 		 CAN1_Data[7]=0x00;				 
 			 WriteCAN1(8,1, CAN1ID,CAN1_Data);	
 }
-void InitiateMT36(void)
+void InitiateMT36(uint8_t port)
 {	
-			 if(Sys_PARA.ChargerNO==0){	
+			 if(port==0){	
 			 CAN1ID=0x1835a000;  
 	  }else{
 			 CAN1ID=0x1835a001; 
@@ -850,9 +847,9 @@ void InitiateMT36(void)
 	
 	
 }
-void InitiateMT37(void)
+void InitiateMT37(uint8_t port)
 {	
-			 if(Sys_PARA.ChargerNO==0){	
+			 if(port==0){	
 			 CAN1ID=0x1835a000;  
 	  }else{
 			 CAN1ID=0x1835a001; 

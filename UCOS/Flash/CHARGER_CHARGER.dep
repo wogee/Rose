@@ -23,7 +23,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -35,8 +35,8 @@ I (.\BSP\eeprom.h)(0x5F83F3D0)
 I (.\User\insulation.h)(0x5DA06C6C)
 I (.\User\cortexm3.h)(0x5C44A3A0)
 I (.\User\module.h)(0x5F61B840)
-F (.\User\bms.c)(0x5FA90444)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\bms.o --omf_browse .\flash\bms.crf --depend .\flash\bms.d)
-I (.\User\bms.h)(0x5F71B7CE)
+F (.\User\bms.c)(0x5FAA1046)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\bms.o --omf_browse .\flash\bms.crf --depend .\flash\bms.d)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
 I (D:\software\MDK\ARM\ARMCC\include\stdint.h)(0x57F606B8)
@@ -59,7 +59,7 @@ I (.\BSP\ssp.h)(0x5C44A3A0)
 I (.\BSP\rtc.h)(0x5F814CB9)
 I (.\User\insulation.h)(0x5DA06C6C)
 I (.\BSP\adc.h)(0x5FA3ADBE)
-F (.\User\module.c)(0x5FA907EE)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\module.o --omf_browse .\flash\module.crf --depend .\flash\module.d)
+F (.\User\module.c)(0x5FAA3DA6)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\module.o --omf_browse .\flash\module.crf --depend .\flash\module.d)
 I (.\User\module.h)(0x5F61B840)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
@@ -72,7 +72,7 @@ I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
 I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\User\main.h)(0x5F4CC9C3)
 I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\Code\print.h)(0x5C44A3A0)
@@ -100,7 +100,7 @@ I (.\BSP\uart.h)(0x5DC3931C)
 I (D:\software\MDK\ARM\ARMCC\include\string.h)(0x57F606B8)
 I (.\BSP\gpio.h)(0x5F9A7B34)
 I (.\Code\calculator.h)(0x5DA04AD8)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\User\main.h)(0x5F4CC9C3)
 I (.\BSP\can.h)(0x5FA8F791)
 I (.\Code\print.h)(0x5C44A3A0)
@@ -133,7 +133,7 @@ I (..\Common\CoreSupport\core_cmInstr.h)(0x5C44A3A0)
 I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc_types.h)(0x5C44A3A0)
 I (.\Ports\os_cpu.h)(0x5C44A3A0)
-F (.\BSP\adc.c)(0x5FA3B5A1)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\adc.o --omf_browse .\flash\adc.crf --depend .\flash\adc.d)
+F (.\BSP\adc.c)(0x5FA90DCD)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\Ports -I .\uCOS-II -I .\User -I .\CMSIS_M3 -I ..\Common\Drivers\include -I ..\Common\BoardSupport -I ..\Common\CoreSupport -I ..\Common\DeviceSupport -I .\BSP -I .\Code-I.\RTE\_CHARGER-ID:\software\MDK\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\software\MDK\ARM\PACK\Keil\LPC1700_DFP\2.3.0\Device\Include-D__UVISION_VERSION="523" -D_RTE_ -DLPC177x_8x-o .\flash\adc.o --omf_browse .\flash\adc.crf --depend .\flash\adc.d)
 I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\CMSIS_M3\LPC177x_8x.h)(0x5C44A3A0)
 I (.\CMSIS_M3\core_cm3.h)(0x5C44A3A0)
@@ -169,7 +169,7 @@ I (..\Common\CoreSupport\core_cmFunc.h)(0x5C44A3A0)
 I (..\Common\Drivers\include\lpc_types.h)(0x5C44A3A0)
 I (.\Ports\os_cpu.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 I (.\User\main.h)(0x5F4CC9C3)
@@ -204,7 +204,7 @@ I (.\Ports\os_cpu.h)(0x5C44A3A0)
 I (.\CMSIS_M3\system_LPC177x_8x.h)(0x5C44A3A0)
 I (.\User\main.h)(0x5F4CC9C3)
 I (.\BSP\gpio.h)(0x5F9A7B34)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\uCOS-II\ucos_ii.h)(0x5C44A3A0)
 I (.\uCOS-II\os_cfg.h)(0x5DA96B32)
 I (.\BSP\can.h)(0x5FA8F791)
@@ -334,7 +334,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -368,7 +368,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -402,7 +402,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -436,7 +436,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -470,7 +470,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -504,7 +504,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -538,7 +538,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -572,7 +572,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -606,7 +606,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -643,7 +643,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -677,7 +677,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)
@@ -711,7 +711,7 @@ I (.\BSP\adc.h)(0x5FA3ADBE)
 I (.\BSP\timer.h)(0x5C44A3A0)
 I (.\BSP\uart.h)(0x5DC3931C)
 I (.\BSP\can.h)(0x5FA8F791)
-I (.\User\bms.h)(0x5F71B7CE)
+I (.\User\bms.h)(0x5FAA0AB3)
 I (.\Code\print.h)(0x5C44A3A0)
 I (.\Code\calculator.h)(0x5DA04AD8)
 I (.\User\fram.h)(0x5F83F55D)

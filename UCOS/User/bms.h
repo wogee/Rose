@@ -114,8 +114,17 @@ typedef struct _MessageCharger
 	   uint8_t   PreCharge;		 		     //预充标志
 	   uint32_t  StopReason;		
 }ChargeMsg;
-
 extern ChargeMsg ChargerMsg;
+
+typedef struct _SwitchStatus
+{		
+	   uint8_t   EMGStat;               // 急停
+	   uint8_t   DoorStat;              // 门禁
+	   uint8_t   ELockerStat;           // 电磁锁 
+//		 uint8_t   ContactorStat;         // 直流接触器
+	   	
+}SwitchStatus;
+extern SwitchStatus SwitchStat;
 
 extern void BMSMain(void);
 

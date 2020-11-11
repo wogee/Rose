@@ -242,6 +242,7 @@ uint8_t OutVoltageDetFlag;  //  1，开始检测电池电压  2，电池电压检测通过   3，电
 
 BMSMsg BMSMessage;
 ChargeMsg ChargerMsg;
+SwitchStatus SwitchStat;
 
 static void ChargerMsgInit(void);
 static void BMS_CHM(void);
@@ -320,16 +321,27 @@ void BMSMain (void)
 	   ChargerMsg.ChargeStage=0;
 	 	 //未插枪，做插枪提示
 	 }
-	                                                                                      //急停处理
-   if(STOP_INT_Status()==1)
+	                                                                                     
+   if(STOP_INT_Status()==0)                                                             //急停处理
 	 {
-		 
-	 }		 
-   if(STOP_INT_Status()==1)                                                             //门禁处理
-	 {
-		 
+		 SwitchStat.EMGStat=1;
+		 ChargerMsg.ChargeStage=8;
 	 }
- 
+  else
+   {
+		 SwitchStat.EMGStat=0;
+	 }
+	 
+   if(STOP_INT_Status()==0)                                                             //门禁处理
+	 {
+		 SwitchStat.DoorStat =1;
+		 ChargerMsg.ChargeStage=8;
+	 }
+  else
+   {
+		 SwitchStat.DoorStat=0;
+	 }	 
+	 	 
 		BMS_RECData_Pro();                                                                 // 处理充电桩过来的数据 ，主要是被动处理函数 	 	 
 	switch (ChargerMsg.ChargeStage)
 	{
