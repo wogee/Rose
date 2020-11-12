@@ -748,7 +748,7 @@ void InitiateMT33(uint8_t port)
 			 CAN1ID=0x1033a001; 
 		}	                    
 			 CAN1_Data[0]=0x00;
-			 CAN1_Data[1]=0x00;
+			 CAN1_Data[1]=ChargerMsg.StopCause;
 			 CAN1_Data[2]=0x00;
 			 CAN1_Data[3]=0x00;
 			 CAN1_Data[4]=0x00;

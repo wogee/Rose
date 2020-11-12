@@ -913,9 +913,14 @@ void BSM_Analyse(void)
 			    BMSMessage.MINBatteryTemp         = (MessageCAN0.DATAA>>24)&0xff;			 
 			    BMSMessage.MINBatteryTempNO       = MessageCAN0.DATAB&0xff;						 
 			    BMSMessage.SingleVoltageOHOL      = (MessageCAN0.DATAB>>8)&0x03;
-           if (BMSMessage.SingleVoltageOHOL	==0x01)
+           if (BMSMessage.SingleVoltageOHOL	!=0x00)                                         //单体电压过高或者过低
 					 {
-					      ChargerMsg.StopReason=0xf0f40010;	
+						 		memset(&ChargerMsg.StopReason,0xf0f00000,sizeof(ChargerMsg.StopReason));
+			          ChargerMsg.StopReason=0xf0f00000;	
+						   if (BMSMessage.SingleVoltageOHOL	==0x01)
+			          ChargerMsg.StopCause=CAUSE_BSM_SINGLEBATTERY_OVERVOL_FAULT;	
+						   else
+								ChargerMsg.StopCause=CAUSE_BSM_SINGLEBATTERY_LESSVOL_FAULT;
 						    ChargerMsg.ChargeStage=8;	
 					 }						 					 
 			    BMSMessage.SOCOHOL = (MessageCAN0.DATAB>>8)&0x0c;	
@@ -967,7 +972,36 @@ void BST_Analyse(void)
 		{
        ChargerMsg.ChargeStage=8;
 			 BMSMessage.BSTflag=1;
-			 BMS_CST(ChargerMsg.StopReason);							
+		 	 memset(&ChargerMsg.StopReason,0xf0f00000,sizeof(ChargerMsg.StopReason));
+			 ChargerMsg.StopReason=0xf0f00000&0x80;		                               //BMS主动停止
+			 BMS_CST(ChargerMsg.StopReason);
+	    //停机原因		
+			if((MessageCAN0.DATAA&0xff)==0x01)                                      
+			 ChargerMsg.StopCause=CAUSE_BST_NORMAL_REACHSOC;                          //达到SOC目标值
+			if((MessageCAN0.DATAA&0xff)==0x04)                                       
+			 ChargerMsg.StopCause=CAUSE_BST_NORMAL_REACHTOTALVOL;                     //达到总电压设定值
+			if((MessageCAN0.DATAA&0xff)==0x10)                                      
+			 ChargerMsg.StopCause=CAUSE_BST_NORMAL_REACHSINGLEVOL;                    //达到单体电压设定值
+			if((MessageCAN0.DATAA&0xffffff)==0x0100)                                                           
+			 ChargerMsg.StopCause=CAUSE_BST_FAULT_INSULATION;                         //BST绝缘故障                        
+			if((MessageCAN0.DATAA&0xffffff)==0x0400)                                                          
+			 ChargerMsg.StopCause=CAUSE_BST_FAULT_OUTPUTCONNECTER_OVERTEMP;           //BST连接器过温
+			if((MessageCAN0.DATAA&0xffffff)==0x1000)                                                            
+			 ChargerMsg.StopCause=CAUSE_BST_FAULT_ELEMENT_OVERTEMP;                   //BSTbms输出过温
+			if((MessageCAN0.DATAA&0xffffff)==0x8000)                                                            
+			 ChargerMsg.StopCause=CAUSE_BST_FAULT_OUTPUTCONNECTER;                    //BST连接器故障
+			if((MessageCAN0.DATAA&0xffffff)==0x10000)                                                           
+			 ChargerMsg.StopCause=CAUSE_BST_FAULT_BATTERYOVERTEMP;                    //BST电池组温度过高
+			if((MessageCAN0.DATAA&0xffffff)==0x40000)                                                           
+			 ChargerMsg.StopCause=CAUSE_BST_FAULT_RELAY;                              //BST高压继电器故障		
+			if((MessageCAN0.DATAA&0xffffff)==0x100000)                                                           
+			 ChargerMsg.StopCause=CAUSE_BST_FAULT_CHECKPOINT2;                        //BST电压2检测故障		
+			if((MessageCAN0.DATAA&0xffffff)==0x800000)                                                           
+			 ChargerMsg.StopCause=CAUSE_BST_FAULT_OTHER;                              //BST其他故障		
+			if(((MessageCAN0.DATAA>>24)&0xff)==0x01)                                                           
+			 ChargerMsg.StopCause=CAUSE_BST_ERROR_CUR;                                //BST电流超过需求值	
+			if(((MessageCAN0.DATAA>>24)&0xff)==0x4)                                                          
+			 ChargerMsg.StopCause=CAUSE_BST_ERROR_VOL;                                //BST电压异常						
 		}		
 }	
 

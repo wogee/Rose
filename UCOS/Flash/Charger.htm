@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Flash\Charger.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Flash\Charger.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Wed Nov 11 14:52:17 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Thu Nov 12 09:29:30 2020
 <BR><P>
 <H3>Maximum Stack Usage =        168 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -284,7 +284,9 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc177x_8x.o(RESET)
 </UL>
 <P><STRONG><a name="[42]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset$wrapper
+<BR><BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BST_Analyse
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BSM_Analyse
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset$wrapper
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 
@@ -481,15 +483,20 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMS_RECData_Pro
 </UL>
 
-<P><STRONG><a name="[66]"></a>BSM_Analyse</STRONG> (Thumb, 338 bytes, Stack size 0 bytes, bms.o(i.BSM_Analyse))
-<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMS_RECData_Pro
+<P><STRONG><a name="[66]"></a>BSM_Analyse</STRONG> (Thumb, 378 bytes, Stack size 8 bytes, bms.o(i.BSM_Analyse))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = BSM_Analyse
+</UL>
+<BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+</UL>
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMS_RECData_Pro
 </UL>
 
-<P><STRONG><a name="[67]"></a>BST_Analyse</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, bms.o(i.BST_Analyse))
+<P><STRONG><a name="[67]"></a>BST_Analyse</STRONG> (Thumb, 326 bytes, Stack size 8 bytes, bms.o(i.BST_Analyse))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
 <LI>Call Chain = BST_Analyse &rArr; BMS_CST &rArr; WriteCAN0 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMS_CST
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMS_RECData_Pro
 </UL>
@@ -1500,7 +1507,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ModuleMain
 </UL>
 
-<P><STRONG><a name="[72]"></a>InitiateMT33</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, module.o(i.InitiateMT33))
+<P><STRONG><a name="[72]"></a>InitiateMT33</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, module.o(i.InitiateMT33))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80 + Unknown Stack Size
 <LI>Call Chain = InitiateMT33 &rArr; WriteCAN1 &rArr; OSTimeDlyHMSM &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
