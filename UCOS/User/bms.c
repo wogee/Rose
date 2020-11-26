@@ -363,6 +363,10 @@ void BMSMain (void)
 				    BMS_CHM();
 		     }		
 				//BMS通讯超时 当CHM发送时间超过5秒时	判断通讯超时	
+				  if((ChargerMsg.CHMcnt>=3000)&&(BMSMessage.BHMflag==1))
+					 {
+					   ChargerMsg.ChargeStage=3;
+					 }
          if((ChargerMsg.CHMcnt>=8000)&&(BMSMessage.BHMflag==0))
 					 {
 					   ChargerMsg.ChargeStage=8;
@@ -1007,8 +1011,12 @@ void BST_Analyse(void)
 
 void BSD_Analyse(void)	
 {    	
+	 if(ChargerMsg.ChargeStage >= 8)
+	 {
 	      ChargerMsg.BSDcnt=0;
-			  BMS_CSD();							
+			  BMS_CSD();	
+				ChargerMsg.ChargeStage = 9;	
+	 }
 }	
 
 void BEM_Analyse(void)	
