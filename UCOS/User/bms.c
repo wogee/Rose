@@ -894,7 +894,7 @@ void BRO_Analyse(void)
 
 void BCL_Analyse(void)	
 { 
-		if(ChargerMsg.ChargeStage>=6)
+		if(ChargerMsg.ChargeStage==7)
 	 {         		     
 				BMS_CCS();			 
 				BMSMessage.RequestVoltage = MessageCAN0.DATAA&0xffff;
